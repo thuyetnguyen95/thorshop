@@ -1,0 +1,23 @@
+{
+  "admin": [
+    {
+      "username": "admin",
+      "password": "123"
+    }
+  ],
+  "users": [
+    {
+      "id": 1588024608999,
+      "name": "Thuyết Nguyễn",
+      "email": "mail@mail.com",
+      "password": "123"
+    },
+    {
+      "id": 1588305716322,
+      "name": "Thuyet test",
+      "phoneNumber": "0382221859",
+      "email": "test@mail.com",
+      "password": "123"
+    }
+  ]
+}
