@@ -1,12 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-const thorController = require('../controllers/thor')
+const ThorMiddleWare = require('../middlewares/thor')
+const ThorController = require('../controllers/thor')
 
-router.get('/login', thorController.showLogin)
-router.post('/login', thorController.login)
-router.get('/', thorController.index)
-
-
+router.get('/login', ThorMiddleWare.isLoggedIn, ThorController.showLogin)
+router.post('/login', ThorController.login)
+router.get('/', ThorMiddleWare.auth, ThorController.index)
 
 module.exports = router;

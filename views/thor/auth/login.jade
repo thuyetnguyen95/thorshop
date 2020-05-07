@@ -1,8 +1,8 @@
-extends ../layout
+extends ../layout/login
 
 block content
   .container
-    .row.mt-5
+    .row
       .col-sm-6.col-md-6.offset-md-3
         .text-center
           h1.login-title Wellcome back Thor
@@ -10,8 +10,25 @@ block content
             .col-md-8.offset-md-2
               .account-wall
               img.profile-img(src='/images/logo.jpg' alt='')
+              if errors && errors.length
+                .alert.alert-danger.mt-2 #{errors.shift()}
               form.form-signin(action="/thor/login" method="post")
                 input.form-control.mt-2(type='text' placeholder='Username' name="username" required='' autofocus='')
                 input.form-control.mt-2(type='password' placeholder='Password' name="password" required='')
                 button.btn.btn-lg.btn-primary.btn-block.mt-2(type='submit')
                   | Sign in
+
+block style
+  style.
+    body {
+      background-color: #101c2a;
+      color: #fff;
+    }
+    .container {
+      padding-top: 150px;
+    }
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 100%;
+    }

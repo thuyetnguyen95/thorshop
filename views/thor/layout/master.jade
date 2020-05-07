@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    include ../partials/header
+  body.sb-nav-fixed
+    include ../partials/navbar
+  
+    #layoutSidenav
+      include ../partials/sidebar
+
+      #layoutSidenav_content
+        main
+          block content
+
+    include ../partials/script
