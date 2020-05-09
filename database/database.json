@@ -6,5 +6,24 @@
       "displayName": "Thor of Asgard"
     }
   ],
-  "products": []
+  "products": [],
+  "category": [
+    {
+      "id": "YVWyflYEx",
+      "name": "Bánh mì"
+    },
+    {
+      "id": "R5l-BYsuD",
+      "name": "Sữa"
+    },
+    {
+      "id": "1lOTv3Dt_",
+      "name": "Nước ngọt"
+    },
+    {
+      "id": "jP2GLNKNS",
+      "name": "Loại khác"
+    }
+  ],
+  "count": 7
 }

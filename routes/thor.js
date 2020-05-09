@@ -7,7 +7,14 @@ const ThorController = require('../controllers/thor')
 router.get('/login', ThorMiddleWare.isLoggedIn, ThorController.showLogin)
 router.post('/login', ThorController.login)
 router.get('/', ThorMiddleWare.auth, ThorController.index)
+
 router.get('/category', ThorMiddleWare.auth, ThorController.indexCategory)
+router.get('/category/create', ThorMiddleWare.auth, ThorController.createCategory)
+router.post('/category/store', ThorMiddleWare.auth, ThorController.storeCategory)
+router.get('/category/edit/:id', ThorMiddleWare.auth, ThorController.editCategory)
+router.post('/category/update/:id', ThorMiddleWare.auth, ThorController.updateCategory)
+router.get('/category/delete/:id', ThorMiddleWare.auth, ThorController.deleteCategory)
+
 router.get('/product', ThorMiddleWare.auth, ThorController.product)
 
 module.exports = router;

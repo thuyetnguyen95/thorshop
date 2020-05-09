@@ -10,6 +10,25 @@ html
 
       #layoutSidenav_content
         main
-          block content
+          .container-fluid
+          
+            block content
+          
+          footer.py-4.bg-light.mt-auto
+            .container-fluid
+              .d-flex.align-items-center.justify-content-between.small
+                .text-muted Copyright © Thor Avengers Shop 2020
+                div
+                  a(href='#') Privacy Policy
+                  |                                 ·
+                  a(href='#') Terms & Conditions
+            
 
+    block style
+    style.
+      main {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
     include ../partials/script
