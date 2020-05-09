@@ -1,17 +1,20 @@
 const shortid  = require('shortid')
 const db = require('../database/db')
 
-const save = (name) => {
+const save = (product) => {
   const id = shortid.generate()
-  db.get('products').push({id, name}).write()
+  
+  product.addedAt = new Date()
+
+  db.get('products').push({id, ...product}).write()
 
   return findById(id)
 }
 
 const all = () => {
-  let categories = db.get('products').value()
+  let products = db.get('products').value()
 
-  return categories.length ? categories : []
+  return products.length ? products : []
 }
 
 const update = (id, name) => {
