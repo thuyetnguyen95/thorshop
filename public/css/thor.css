@@ -1,0 +1,15 @@
+.chip {
+  color: #fff;
+  font-size: 12px;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+.chip.chip-success {
+  background-color: #28a745;
+}
+.chip.chip-warning {
+  background-color: #ffc107;
+}
+.chip.chip-danger {
+  background-color: #dc3545;
+}

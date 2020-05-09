@@ -6,15 +6,65 @@
       "displayName": "Thor of Asgard"
     }
   ],
-  "products": [],
+  "products": [
+    {
+      "id": "ads",
+      "name": "Bánh mì đậu đỏ",
+      "stock": 0,
+      "price": 5000,
+      "status": {
+        "text": "Hết hàng",
+        "class": "chip-danger"
+      },
+      "addedAt": "2020-02-02",
+      "expiryAt": "2020-05-02",
+      "image": "/something",
+      "categoryId": 1
+    },
+    {
+      "id": "kNGVLwWjY",
+      "name": "xúc xích",
+      "stock": 4,
+      "price": 7000,
+      "expiryAt": "2020-05-09T13:07:04.358Z",
+      "categoryId": "YVWyflYEx",
+      "addedAt": "2020-05-09T13:07:04.359Z",
+      "status": {
+        "text": "Sắp hết",
+        "class": "chip-warning"
+      }
+    },
+    {
+      "id": "qklSDFMUe",
+      "name": "ahihihihi",
+      "stock": 10,
+      "price": 5000,
+      "expiryAt": 1590537600000,
+      "categoryId": "YVWyflYEx",
+      "addedAt": "2020-05-09T13:07:55.560Z",
+      "status": {
+        "text": "Đang còn",
+        "class": "chip-success"
+      }
+    },
+    {
+      "id": "rprno2ynv",
+      "name": "Bia",
+      "stock": 5,
+      "price": 13000,
+      "expiryAt": 1620777600000,
+      "categoryId": "1lOTv3Dt_",
+      "addedAt": "2020-05-09T13:23:13.071Z"
+    }
+  ],
   "category": [
     {
       "id": "YVWyflYEx",
-      "name": "Bánh mì"
+      "name": "Đồ ăn"
     },
     {
       "id": "R5l-BYsuD",
-      "name": "Sữa"
+      "name": "Snack"
     },
     {
       "id": "1lOTv3Dt_",

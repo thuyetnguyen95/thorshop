@@ -1,0 +1,45 @@
+extends ../layout/master
+
+block content
+
+  nav(aria-label='breadcrumb' class="mb-4 mt-4")
+    ol.breadcrumb
+      li.breadcrumb-item
+        a(href='/thor/product') Sản phẩm
+      li.breadcrumb-item Thêm mới
+  hr
+  .row
+    .col-md-6
+      form(action="/thor/product/store" method="post")
+        .form-group
+          label(for='lbCategoryId') Example select
+          select#lbCategoryId.form-control(name="categoryId" required)
+            option(value="") -- Chọn 1 loại --
+            each category in categories
+              option(value=category.id)= category.name
+          
+          label(for="lbName") Tên sản phẩm
+          input#lbName.form-control(type="text" name="name" placeholder="Eg: chúc chích heo" required)
+          
+          .row
+            .col-md-6.col-sm-6.col-xs-12
+              label(for="lbStock" class="mt-1") Số lượng
+              input#lbStock.form-control(type="number" name="stock")
+
+            .col-md-6.col-sm-6.col-xs-12
+              label(for="lbPrice" class="mt-1") Giá
+              input#lbPrice.form-control(type="number" name="price")
+
+          .row
+            .col-md-6.col-sm-6.col-xs-12
+              label(for="lbExpiry" class="mt-1") Ngày hết hạn
+              input#lbExpiry.form-control(type="date" name="expiryAt")
+
+          label(for="lbImage" class="mt-1") Ảnh
+          input#lbImage.form-control(type="file" name="image")
+          
+          //- label(for="lbName" class="mt-1") Tên sản phẩm
+          //- input#lbName.form-control(type="text" name="name" placeholder="Eg: chúc chích heo" required oninvalid="this.setCustomValidity('Nhập tên đi, đừng lầy lội')")
+          
+          
+        button.btn.btn-success(type="submit") Lưu
