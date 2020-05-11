@@ -10,7 +10,7 @@ block content
   hr
   .row
     .col-md-6
-      form(action="/thor/product/store" method="post")
+      form(action="/thor/product/store" method="post" enctype="multipart/form-data")
         .form-group
           label(for='lbCategoryId') Example select
           select#lbCategoryId.form-control(name="categoryId" required)
@@ -18,24 +18,24 @@ block content
             each category in categories
               option(value=category.id)= category.name
           
-          label(for="lbName") Tên sản phẩm
+          label(for="lbName" class="mt-2") Tên sản phẩm
           input#lbName.form-control(type="text" name="name" placeholder="Eg: chúc chích heo" required)
           
-          .row
+          .row.mt-2
             .col-md-6.col-sm-6.col-xs-12
-              label(for="lbStock" class="mt-1") Số lượng
+              label(for="lbStock") Số lượng
               input#lbStock.form-control(type="number" name="stock")
 
             .col-md-6.col-sm-6.col-xs-12
-              label(for="lbPrice" class="mt-1") Giá
+              label(for="lbPrice") Giá
               input#lbPrice.form-control(type="number" name="price")
 
-          .row
+          .row.mt-2
             .col-md-6.col-sm-6.col-xs-12
-              label(for="lbExpiry" class="mt-1") Ngày hết hạn
+              label(for="lbExpiry") Ngày hết hạn
               input#lbExpiry.form-control(type="date" name="expiryAt")
 
-          label(for="lbImage" class="mt-1") Ảnh
+          label(for="lbImage" class="mt-2") Ảnh
           input#lbImage.form-control(type="file" name="image")
           
           //- label(for="lbName" class="mt-1") Tên sản phẩm
