@@ -31,7 +31,7 @@ const generateExpiryDate = () => {
 
 module.exports = {
   indexProduct: (req, res) => {
-    const products = Product.all() || []
+    let products = Product.all() || []
     
     products.map(product => {
       product.status = getProductStatus(product)

@@ -15,11 +15,7 @@
       "expiryAt": 1589155200000,
       "categoryId": "YVWyflYEx",
       "image": "image-1589206482419-868095502.JPEG",
-      "addedAt": "2020-05-11T14:14:42.422Z",
-      "status": {
-        "text": "Đang còn",
-        "class": "chip-success"
-      }
+      "addedAt": "2020-05-11T14:14:42.422Z"
     },
     {
       "id": "Oqp1KRi5G",
@@ -29,11 +25,7 @@
       "expiryAt": 1590710400000,
       "categoryId": "R5l-BYsuD",
       "image": "image-1589206568299-399970911.JPEG",
-      "addedAt": "2020-05-11T14:16:08.303Z",
-      "status": {
-        "text": "Sắp hết",
-        "class": "chip-warning"
-      }
+      "addedAt": "2020-05-11T14:16:08.303Z"
     },
     {
       "id": "3VtcQGUU3",
@@ -43,11 +35,7 @@
       "expiryAt": "2020-05-30",
       "categoryId": "1lOTv3Dt_",
       "image": "image-1589259792624-694994670.png",
-      "addedAt": "2020-05-12T05:03:17.189Z",
-      "status": {
-        "text": "Sắp hết",
-        "class": "chip-warning"
-      }
+      "addedAt": "2020-05-12T05:03:17.189Z"
     },
     {
       "id": "em4JjDIA2",
@@ -57,11 +45,7 @@
       "expiryAt": "2020-05-12",
       "categoryId": "jP2GLNKNS",
       "image": "image-1589259836447-250320565.png",
-      "addedAt": "2020-05-12T05:03:56.457Z",
-      "status": {
-        "text": "Sắp hết",
-        "class": "chip-warning"
-      }
+      "addedAt": "2020-05-12T05:03:56.457Z"
     },
     {
       "id": "lhGO-9uyy",
@@ -71,24 +55,16 @@
       "expiryAt": "2020-06-12",
       "categoryId": "1lOTv3Dt_",
       "image": "image-1589259901723-613932734.png",
-      "addedAt": "2020-05-12T05:05:01.739Z",
-      "status": {
-        "text": "Sắp hết",
-        "class": "chip-warning"
-      }
+      "addedAt": "2020-05-12T05:05:01.739Z"
     },
     {
       "id": "Wb0hUb1Xp",
-      "name": "xxx",
+      "name": "xxx12345",
       "stock": 2,
       "price": 50000,
       "expiryAt": "2020-05-31",
       "categoryId": "1lOTv3Dt_",
-      "addedAt": "2020-05-12T07:44:59.108Z",
-      "status": {
-        "text": "Sắp hết",
-        "class": "chip-warning"
-      }
+      "addedAt": "2020-05-12T07:44:59.108Z"
     }
   ],
   "category": [

@@ -18,7 +18,7 @@ const all = () => {
 }
 
 const update = (id, product) => {
-  db.get('products').find({id}).assign(product).write()
+  db.get('products').find({id}).assign({...product}).write()
 
   return findById(id)
 }
