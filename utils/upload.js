@@ -6,6 +6,8 @@ var storage = multer.diskStorage({
     cb(null, path.join(__dirname, '../public/images'))
   },
   filename: function (req, file, cb) {
+    if (!file) return cb(null)
+
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
     const fileName = file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname)
 
@@ -15,4 +17,14 @@ var storage = multer.diskStorage({
   }
 })
 
-module.exports = multer({ storage: storage })
+const fileFilter = (req, file, cb) => {
+  if (!file) return cb(null)
+  
+  if (file.mimetype.toLowerCase() === 'image/png' || file.mimetype.toLowerCase() === 'image/jpg' || file.mimetype.toLowerCase() === 'image/jpeg') {
+    cb(null, req)
+  } else {
+    cb('file type invalid')
+  }
+}
+
+module.exports = multer({ storage: storage, fileFilter: fileFilter })

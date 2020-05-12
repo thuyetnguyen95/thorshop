@@ -1,0 +1,55 @@
+extends ../layout/master
+
+block content
+
+  nav(aria-label='breadcrumb' class="mb-4 mt-4")
+    ol.breadcrumb
+      li.breadcrumb-item
+        a(href='/thor/product') Sản phẩm
+      li.breadcrumb-item Chỉnh sửa
+  hr
+  
+  form(action="/thor/product/update/#{product.id}" method="post" )
+    .row
+      .col-md-6
+        .form-group
+          label(for='lbCategoryId') Loại sản phẩm
+          select#lbCategoryId.form-control(name="categoryId" required)
+            option(value="") -- Chọn 1 loại --
+            each category in categories
+              option(value=category.id selected=category.id === product.categoryId)= category.name
+          
+          label(for="lbName" class="mt-2") Tên sản phẩm
+          input#lbName.form-control(type="text" name="name" value="#{product.name}" placeholder="Eg: chúc chích heo" required)
+          
+          .row.mt-2
+            .col-md-6.col-sm-6.col-xs-12
+              label(for="lbStock") Số lượng
+              input#lbStock.form-control(type="number" name="stock" value="#{product.stock}")
+
+            .col-md-6.col-sm-6.col-xs-12
+              label(for="lbPrice") Giá
+              input#lbPrice.form-control(type="number" name="price" value="#{product.price}")
+
+          .row.mt-2
+            .col-md-6.col-sm-6.col-xs-12
+              label(for="lbExpiry") Ngày hết hạn
+              input#lbExpiry.form-control(type="date" name="expiryAt" value="#{product.expiryAt}")
+
+          label(for="lbImage" class="mt-2") Ảnh
+          input#lbImage.form-control(type="file" name="image")
+          
+          //- label(for="lbName" class="mt-1") Tên sản phẩm
+          //- input#lbName.form-control(type="text" name="name" placeholder="Eg: chúc chích heo" required oninvalid="this.setCustomValidity('Nhập tên đi, đừng lầy lội')")
+      
+      .col-md-6
+        img(class="product-image" src="/images/#{product.image}")
+        
+      button.btn.btn-success(type="submit") Lưu
+
+
+block style
+  style. 
+    .product-image {
+      max-width: 500px;
+    }

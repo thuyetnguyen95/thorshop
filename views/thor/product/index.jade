@@ -5,19 +5,21 @@ block content
     li(class="breadcrumb-item active") Sản phẩm
   .row.mb-4.mt-4
     .col-md-6
-      a(href="/thor/product/create" class="btn btn-primary") Thêm mới
+    .col-md-6.text-right 
+      a(href="/thor/product/create" class="btn btn-primary btn-sm") Thêm mới
+      a(href="/thor/product/import" class="btn btn-secondary btn-sm ml-1") Nhập hàng
   .row
     .col-md-12
       .table-responsive
-        table.table.table-striped
+        table.table.table-hover
           thead
             tr
               th(scope='col' class="thead-id") #
-              th(scope='col') Hình ảnh
+              th(scope='col' class="thead-image") Hình ảnh
               th(scope='col') Tên
-              th(scope='col') Số lượng
-              th(scope='col') Giá bán
-              th(scope='col') Trạng thái
+              th(scope='col' class="thead-stock") Số lượng
+              th(scope='col' class="thead-price") Giá bán
+              th(scope='col' class="thead-status") Trạng thái
               th(scope='col' class="thead-action") Tác vụ
           tbody
             if products.length
@@ -25,11 +27,10 @@ block content
                 tr
                   td= index + 1
                   td
-                    //- img(src="#{product.image}")
                     img(class="product-image" src="/images/#{product.image}")
                   td= product.name
                   td= product.stock
-                  td= product.price
+                  td= product.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})
                   td
                     span(class="chip #{product.status.class}")= product.status.text
                   td
@@ -39,15 +40,23 @@ block content
 
 block style
   style.
-   .thead-id {
+    .thead-id {
+        width: 50px;
+    }
+
+    .thead-image {
       width: 150px;
-   }
+    }
 
-   .thead-action {
-     width: 200px;
-   }
+    .thead-stock, .thead-price, .thead-status, .thead-action {
+      width: 200px;
+    }
 
-   .product-image {
-     width: 60px;
-     height: 60px;
-   }
+    .product-image {
+      width: 85px;
+      height: 50px;
+    }
+
+    .table {
+      min-width: 1000px;
+    }

@@ -17,8 +17,8 @@ const all = () => {
   return products.length ? products : []
 }
 
-const update = (id, name) => {
-  db.get('products').find({id}).assign({name}).write()
+const update = (id, product) => {
+  db.get('products').find({id}).assign(product).write()
 
   return findById(id)
 }

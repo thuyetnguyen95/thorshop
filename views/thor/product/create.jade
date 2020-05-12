@@ -12,7 +12,7 @@ block content
     .col-md-6
       form(action="/thor/product/store" method="post" enctype="multipart/form-data")
         .form-group
-          label(for='lbCategoryId') Example select
+          label(for='lbCategoryId') Loại sản phảm
           select#lbCategoryId.form-control(name="categoryId" required)
             option(value="") -- Chọn 1 loại --
             each category in categories
@@ -37,9 +37,5 @@ block content
 
           label(for="lbImage" class="mt-2") Ảnh
           input#lbImage.form-control(type="file" name="image")
-          
-          //- label(for="lbName" class="mt-1") Tên sản phẩm
-          //- input#lbName.form-control(type="text" name="name" placeholder="Eg: chúc chích heo" required oninvalid="this.setCustomValidity('Nhập tên đi, đừng lầy lội')")
-          
           
         button.btn.btn-success(type="submit") Lưu

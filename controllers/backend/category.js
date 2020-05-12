@@ -14,7 +14,7 @@ module.exports = {
   
   storeCategory: (req, res) => {
     let name = req.body.name || ''
-    if (!name) return res.redirect('thor/category/create')
+    if (!name) return res.redirect('/thor/category/create')
 
     let category = Category.save(name)
 
