@@ -38,10 +38,9 @@ block content
 
           label(for="lbImage" class="mt-2") Ảnh
           input#lbImage.form-control(type="file" name="image")
-          
-          //- label(for="lbName" class="mt-1") Tên sản phẩm
-          //- input#lbName.form-control(type="text" name="name" placeholder="Eg: chúc chích heo" required oninvalid="this.setCustomValidity('Nhập tên đi, đừng lầy lội')")
-        button.btn.btn-success(type="submit") Lưu
+        
+        a.btn.btn-secondary(href="/thor/product") Back
+        button.btn.btn-success.ml-2(type="submit") Lưu
       
       .col-md-6
         img(class="product-image" src="/images/#{product.image}")

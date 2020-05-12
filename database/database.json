@@ -34,62 +34,6 @@
         "text": "Sắp hết",
         "class": "chip-warning"
       }
-    },
-    {
-      "id": "3VtcQGUU3",
-      "name": "123",
-      "stock": 1,
-      "price": 2,
-      "expiryAt": "2020-05-30",
-      "categoryId": "1lOTv3Dt_",
-      "image": "image-1589259792624-694994670.png",
-      "addedAt": "2020-05-12T05:03:17.189Z",
-      "status": {
-        "text": "Sắp hết",
-        "class": "chip-warning"
-      }
-    },
-    {
-      "id": "em4JjDIA2",
-      "name": "123",
-      "stock": 1,
-      "price": 1,
-      "expiryAt": "2020-05-12",
-      "categoryId": "jP2GLNKNS",
-      "image": "image-1589259836447-250320565.png",
-      "addedAt": "2020-05-12T05:03:56.457Z",
-      "status": {
-        "text": "Sắp hết",
-        "class": "chip-warning"
-      }
-    },
-    {
-      "id": "lhGO-9uyy",
-      "name": "fsgdsfg100",
-      "stock": 100,
-      "price": 1,
-      "expiryAt": "2020-06-12",
-      "categoryId": "1lOTv3Dt_",
-      "image": "image-1589259901723-613932734.png",
-      "addedAt": "2020-05-12T05:05:01.739Z",
-      "status": {
-        "text": "Đang còn",
-        "class": "chip-success"
-      }
-    },
-    {
-      "id": "Wb0hUb1Xp",
-      "name": "xxx12345",
-      "stock": 555,
-      "price": 55000,
-      "expiryAt": "2020-05-30",
-      "categoryId": "jP2GLNKNS",
-      "addedAt": "2020-05-12T07:44:59.108Z",
-      "status": {
-        "text": "Đang còn",
-        "class": "chip-success"
-      },
-      "image": "image-1589322060214-555150412.jpg"
     }
   ],
   "category": [

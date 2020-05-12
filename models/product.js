@@ -23,6 +23,12 @@ const update = (id, product) => {
   return findById(id)
 }
 
+const remove = (id) => {
+  let removed = db.get('products').remove({ id }).write()
+
+  return !!removed.length
+}
+
 const findById = (id) => {
   let product = db.get('products').find({id}).value()
 
@@ -37,8 +43,9 @@ const findByCategoryId = (categoryId) => {
 
 module.exports = {
   save,
-  findById,
   all,
   update,
+  remove,
+  findById,
   findByCategoryId,
 }
