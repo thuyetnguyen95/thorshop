@@ -9,7 +9,7 @@ block content
       li.breadcrumb-item Chỉnh sửa
   hr
   
-  form(action="/thor/product/update/#{product.id}" method="post" )
+  form(action="/thor/product/update/#{product.id}" method="post" enctype="multipart/form-data")
     .row
       .col-md-6
         .form-group
@@ -41,11 +41,10 @@ block content
           
           //- label(for="lbName" class="mt-1") Tên sản phẩm
           //- input#lbName.form-control(type="text" name="name" placeholder="Eg: chúc chích heo" required oninvalid="this.setCustomValidity('Nhập tên đi, đừng lầy lội')")
+        button.btn.btn-success(type="submit") Lưu
       
       .col-md-6
         img(class="product-image" src="/images/#{product.image}")
-        
-      button.btn.btn-success(type="submit") Lưu
 
 
 block style

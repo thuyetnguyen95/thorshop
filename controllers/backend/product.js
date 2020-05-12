@@ -85,19 +85,29 @@ module.exports = {
   },
   
   updateProduct: (req, res) => {
-    let categoryId = req.body.categoryId || ''
-    let id = req.params.id || ''
-    let name = req.body.name || ''
-    let stock = parseInt(req.body.stock || 0)
-    let price = parseInt(req.body.price || 1000)
-    let expiryAt = req.body.expiryAt || generateExpiryDate()
-    // let image = req.body.fileUploadName
-    
-    if (!name) return res.redirect('/thor/product/product')
+    let handleFileUpload = uploadModule.single('image')
 
-    let product = Product.update(id, { name, stock, price, expiryAt, categoryId })
-
-    return product ? res.redirect('/thor/product') : res.redirect('/thor/product/edit/' + id)
+    handleFileUpload(req, res, (error) => {
+      console.log(req)
+      let categoryId = req.body.categoryId || ''
+      let id = req.params.id || ''
+      let name = req.body.name || ''
+      let stock = parseInt(req.body.stock || 0)
+      let price = parseInt(req.body.price || 1000)
+      let expiryAt = req.body.expiryAt || generateExpiryDate()
+      let image = req.body.fileUploadName || null
+      
+      if (!name) return res.redirect('/thor/product/product')
+  
+      let dataUpdate = { name, stock, price, expiryAt, categoryId }
+      if (image) {
+        dataUpdate.image = image
+      }
+      
+      let product = Product.update(id, dataUpdate)
+  
+      return product ? res.redirect('/thor/product') : res.redirect('/thor/product/edit/' + id)
+    })
   },
 
   deleteProduct: (req, res) => {
