@@ -6,6 +6,7 @@ const ThorController = require('../controllers/thor')
 
 router.get('/login', ThorMiddleWare.isLoggedIn, ThorController.showLogin)
 router.post('/login', ThorController.login)
+router.get('/logout', ThorController.logout)
 router.get('/', ThorMiddleWare.auth, ThorController.index)
 
 router.get('/category', ThorMiddleWare.auth, ThorController.indexCategory)
@@ -21,5 +22,6 @@ router.post('/product/store', ThorMiddleWare.auth, ThorController.storeProduct)
 router.get('/product/edit/:id', ThorMiddleWare.auth, ThorController.editProduct)
 router.post('/product/update/:id', ThorMiddleWare.auth, ThorController.updateProduct)
 router.get('/product/delete/:id', ThorMiddleWare.auth, ThorController.deleteProduct)
+router.all('/product/import', ThorMiddleWare.auth, ThorController.importProduct)
 
 module.exports = router;

@@ -21,7 +21,13 @@ module.exports = {
       })
     }
   
-    res.cookie('userIdentification', admin.username, { signed: true })
+    res.cookie('userIdentification', admin.username, { signed: true, expires: new Date(Date.now() + 604800000) })
+    res.redirect('/thor')
+  },
+
+  logout: (req, res) => {
+    res.clearCookie('userIdentification')
+
     res.redirect('/thor')
   }
 }

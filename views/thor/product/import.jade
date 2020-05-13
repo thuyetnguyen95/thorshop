@@ -1,0 +1,32 @@
+extends ../layout/master
+
+block content
+
+  nav(aria-label='breadcrumb' class="mb-4 mt-4")
+    ol.breadcrumb
+      li.breadcrumb-item
+        a(href='/thor/product') Sản phẩm
+      li.breadcrumb-item Nhập thêm mặt hàng
+  hr
+  .row
+    .col-md-4
+      form(action="/thor/product/import" method="post")
+        .form-group
+          label(for='lbProduct') Tên sản phẩm
+          select#lbProduct.form-control(name="productId" required)
+            option(value="") -- Chọn 1 sản phẩm --
+            each product in products
+              option(value=product.id)= product.name
+
+          .row.mt-2
+            .col-md-6.col-sm-6.col-xs-12
+              label(for="lbStock") Số lượng
+              input#lbStock.form-control(type="number" name="stock")
+
+          .row.mt-2
+            .col-md-6.col-sm-6.col-xs-12
+              label(for="lbExpiry") Ngày hết hạn
+              input#lbExpiry.form-control(type="date" name="expiryAt")
+
+        a.btn.btn-secondary(href="/thor/product") Back
+        button.btn.btn-success.ml-2(type="submit") Lưu

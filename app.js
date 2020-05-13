@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var thorRouter = require('./routes/thor');
 
 var app = express();
@@ -22,8 +21,12 @@ app.use(cookieParser(process.env.APP_SECRET_KEY || 'thor'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules/bootstrap/dist')))
 
+app.use(function(req, res, next) {
+  res.locals.title = 'Advengers Thor Shop'
+  next();
+});
+
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/thor', thorRouter);
 
 // catch 404 and forward to error handler

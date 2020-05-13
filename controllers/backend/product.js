@@ -29,17 +29,26 @@ const generateExpiryDate = () => {
   return `${y}-${m}-${d}`
 }
 
+const getAllProduct  = () => {
+  let products = Product.all()
+
+  products = products.map(product => {
+    let tempProduct = {...product}
+    tempProduct.status = getProductStatus(tempProduct)
+
+    return tempProduct
+  })
+
+  return products
+}
+
 module.exports = {
   indexProduct: (req, res) => {
-    let products = Product.all() || []
-    
-    products.map(product => {
-      product.status = getProductStatus(product)
+    let keyword = req.query.keyword || ''
+    let products = getAllProduct()
+    products = products.filter(product => product.name.toLowerCase().includes(keyword))
 
-      return product
-    })
-
-    res.render('thor/product/index', { products })
+    res.render('thor/product/index', { products, keyword })
   },
 
   createProduct: (req, res) => {
@@ -56,20 +65,20 @@ module.exports = {
         console.log(`Error: ${error}`)
 
         return res.redirect('/thor/product/create')
-      } else {
-        let categoryId = req.body.categoryId || ''
-        let name = req.body.name || ''
-        let stock = parseInt(req.body.stock || 0)
-        let price = parseInt(req.body.price || 1000)
-        let expiryAt = req.body.expiryAt || generateExpiryDate()
-        let image = req.body.fileUploadName
-        
-        if (!name) return res.redirect('/thor/product/create')
-
-        let product = Product.save({ name, stock, price, expiryAt, categoryId, image })
-
-        return product ? res.redirect('/thor/product') : res.redirect('/thor/product/create')
       }
+
+      let categoryId = req.body.categoryId || ''
+      let name = req.body.name || ''
+      let stock = parseInt(req.body.stock || 0)
+      let price = parseInt(req.body.price || 1000)
+      let expiryAt = req.body.expiryAt || generateExpiryDate()
+      let image = req.body.fileUploadName
+      
+      if (!name) return res.redirect('/thor/product/create')
+
+      let product = Product.save({ name, stock, price, expiryAt, categoryId, image })
+
+      return product ? res.redirect('/thor/product') : res.redirect('/thor/product/create')
     })
   },
   
@@ -88,7 +97,12 @@ module.exports = {
     let handleFileUpload = uploadModule.single('image')
 
     handleFileUpload(req, res, (error) => {
-      console.log(req)
+      if (error) {
+        console.log(`Error: ${error}`)
+
+        return res.redirect('/thor/product/edit/' + req.params.id)
+      }
+
       let categoryId = req.body.categoryId || ''
       let id = req.params.id || ''
       let name = req.body.name || ''
@@ -117,5 +131,26 @@ module.exports = {
     Product.remove(id)
 
     return res.redirect('/thor/product')
+  },
+
+  importProduct: (req, res) => {
+    if(req.method.toLowerCase() === 'get') {
+      let products = getAllProduct()
+
+      return res.render('thor/product/import', { products })
+    }
+
+    let product = Product.findById(req.body.productId)
+    
+    if (product) {
+      let stock = (parseInt(req.body.stock) || 0) + product.stock
+      let expiryAt = req.body.expiryAt || generateExpiryDate()
+  
+      Product.update(product.id, {stock, expiryAt})
+
+      return res.redirect('/thor/product')
+    }
+
+    return res.redirect('/thor/product/import')
   }
 }

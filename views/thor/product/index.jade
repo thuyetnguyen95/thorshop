@@ -5,6 +5,14 @@ block content
     li(class="breadcrumb-item active") Sản phẩm
   .row.mb-4.mt-4
     .col-md-6
+      form.d-md-inline-block.form-inline.ml-auto.mr-0.mr-md-3.my-2.my-md-0.w-50(action="/thor/product" method="get")
+        .input-group
+          input.form-control(type='text' name="keyword" placeholder='Search for...' value=keyword)
+          .input-group-append
+            button.btn.btn-primary(type='submit')
+              i.fa.fa-search
+      //- form(action="/", method="get")
+      //-   input.form-control(type="text" name="keyword")
     .col-md-6.text-right 
       a(href="/thor/product/create" class="btn btn-primary btn-sm") Thêm mới
       a(href="/thor/product/import" class="btn btn-secondary btn-sm ml-1") Nhập hàng
@@ -28,7 +36,7 @@ block content
                   td= index + 1
                   td
                     img(class="product-image" src="/images/#{product.image}")
-                  td= product.name
+                  td.td-name= product.name
                   td= product.stock
                   td= product.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})
                   td
@@ -50,6 +58,10 @@ block style
 
     .thead-stock, .thead-price, .thead-status, .thead-action {
       width: 200px;
+    }
+
+    .td-name {
+      text-transform: capitalize;
     }
 
     .product-image {
