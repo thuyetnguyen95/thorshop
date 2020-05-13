@@ -1,6 +1,7 @@
 const authController = require('./backend/auth')
 const categoryController = require('./backend/category')
 const productController = require('./backend/product')
+const sellController = require('./backend/sell')
 
 // Home routes
 const index = (req, res) => {
@@ -11,5 +12,6 @@ module.exports = {
   index,
   ...authController,
   ...categoryController,
-  ...productController
+  ...productController,
+  ...sellController,
 }

@@ -36,6 +36,16 @@
       "categoryId": "1lOTv3Dt_",
       "image": "image-1589331839514-322859011.png",
       "addedAt": "2020-05-13T01:03:59.518Z"
+    },
+    {
+      "id": "-ZMhcqiIj",
+      "name": "Kẹo gucci",
+      "stock": 200,
+      "price": 10000,
+      "expiryAt": "2020-05-31",
+      "categoryId": "YVWyflYEx",
+      "image": "image-1589371193111-915027729.jpg",
+      "addedAt": "2020-05-13T11:59:53.116Z"
     }
   ],
   "category": [
@@ -49,7 +59,7 @@
     },
     {
       "id": "1lOTv3Dt_",
-      "name": "Nước ngọt"
+      "name": "Đồ uống"
     },
     {
       "id": "jP2GLNKNS",

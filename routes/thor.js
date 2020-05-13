@@ -24,4 +24,6 @@ router.post('/product/update/:id', ThorMiddleWare.auth, ThorController.updatePro
 router.get('/product/delete/:id', ThorMiddleWare.auth, ThorController.deleteProduct)
 router.all('/product/import', ThorMiddleWare.auth, ThorController.importProduct)
 
+router.get('/sell', ThorMiddleWare.auth, ThorController.indexSell)
+
 module.exports = router;
