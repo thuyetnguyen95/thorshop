@@ -5,13 +5,15 @@ module.exports = {
   indexCategory: (req, res) => {
     const categories = Category.all()
 
-    res.render('thor/category/index', { categories })
+    res.render('thor/category/index', {
+      categories
+    })
   },
-  
+
   createCategory: (req, res) => {
     res.render('thor/category/create')
   },
-  
+
   storeCategory: (req, res) => {
     let name = req.body.name || ''
     if (!name) return res.redirect('/thor/category/create')
@@ -20,18 +22,20 @@ module.exports = {
 
     return category ? res.redirect('/thor/category') : res.redirect('/thor/category/create')
   },
-  
+
   editCategory: (req, res) => {
     let id = req.params.id || ''
-    
+
     let category = Category.findById(id)
     if (!category) {
       return res.redirect('/thor/category')
     }
 
-    return res.render('thor/category/edit', {category})
+    return res.render('thor/category/edit', {
+      category
+    })
   },
-  
+
   updateCategory: (req, res) => {
     let id = req.params.id || ''
     let name = req.body.name || ''
@@ -57,7 +61,7 @@ module.exports = {
     if (products.length) {
       let error = 'Oops! Bạn không thể xóa cái này đâu :('
 
-      return res.redirect('/thor/category')  
+      return res.redirect('/thor/category')
     }
 
     //TODO: implement fail case

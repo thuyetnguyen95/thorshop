@@ -29,11 +29,13 @@ const generateExpiryDate = () => {
   return `${y}-${m}-${d}`
 }
 
-const getAllProduct  = () => {
+const getAllProduct = () => {
   let products = Product.all()
 
   products = products.map(product => {
-    let tempProduct = {...product}
+    let tempProduct = {
+      ...product
+    }
     tempProduct.status = getProductStatus(tempProduct)
 
     return tempProduct
@@ -48,15 +50,20 @@ module.exports = {
     let products = getAllProduct()
     products = products.filter(product => product.name.toLowerCase().includes(keyword))
 
-    res.render('thor/product/index', { products, keyword })
+    res.render('thor/product/index', {
+      products,
+      keyword
+    })
   },
 
   createProduct: (req, res) => {
     const categories = Category.all()
 
-    res.render('thor/product/create', { categories })
+    res.render('thor/product/create', {
+      categories
+    })
   },
-  
+
   storeProduct: (req, res) => {
     let uploadFile = uploadModule.single('image')
 
@@ -73,15 +80,22 @@ module.exports = {
       let price = parseInt(req.body.price || 1000)
       let expiryAt = req.body.expiryAt || generateExpiryDate()
       let image = req.body.fileUploadName
-      
+
       if (!name) return res.redirect('/thor/product/create')
 
-      let product = Product.save({ name, stock, price, expiryAt, categoryId, image })
+      let product = Product.save({
+        name,
+        stock,
+        price,
+        expiryAt,
+        categoryId,
+        image
+      })
 
       return product ? res.redirect('/thor/product') : res.redirect('/thor/product/create')
     })
   },
-  
+
   editProduct: (req, res) => {
     const categories = Category.all()
     if (!req.params.id) {
@@ -90,9 +104,12 @@ module.exports = {
 
     const product = Product.findById(req.params.id)
 
-    res.render('thor/product/edit', {categories, product})
+    res.render('thor/product/edit', {
+      categories,
+      product
+    })
   },
-  
+
   updateProduct: (req, res) => {
     let handleFileUpload = uploadModule.single('image')
 
@@ -110,16 +127,22 @@ module.exports = {
       let price = parseInt(req.body.price || 1000)
       let expiryAt = req.body.expiryAt || generateExpiryDate()
       let image = req.body.fileUploadName || null
-      
+
       if (!name) return res.redirect('/thor/product/product')
-  
-      let dataUpdate = { name, stock, price, expiryAt, categoryId }
+
+      let dataUpdate = {
+        name,
+        stock,
+        price,
+        expiryAt,
+        categoryId
+      }
       if (image) {
         dataUpdate.image = image
       }
-      
+
       let product = Product.update(id, dataUpdate)
-  
+
       return product ? res.redirect('/thor/product') : res.redirect('/thor/product/edit/' + id)
     })
   },
@@ -134,19 +157,24 @@ module.exports = {
   },
 
   importProduct: (req, res) => {
-    if(req.method.toLowerCase() === 'get') {
+    if (req.method.toLowerCase() === 'get') {
       let products = getAllProduct()
 
-      return res.render('thor/product/import', { products })
+      return res.render('thor/product/import', {
+        products
+      })
     }
 
     let product = Product.findById(req.body.productId)
-    
+
     if (product) {
       let stock = (parseInt(req.body.stock) || 0) + product.stock
       let expiryAt = req.body.expiryAt || generateExpiryDate()
-  
-      Product.update(product.id, {stock, expiryAt})
+
+      Product.update(product.id, {
+        stock,
+        expiryAt
+      })
 
       return res.redirect('/thor/product')
     }

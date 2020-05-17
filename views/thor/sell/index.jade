@@ -3,83 +3,64 @@ extends ../layout/master
 block content
   ol.breadcrumb.mb-4.mt-4
     li(class="breadcrumb-item active") Bán hàng
-  .row.mb-4.mt-4
-    .col-md-6
-      form.d-md-inline-block.form-inline.ml-auto.mr-0.mr-md-3.my-2.my-md-0.w-50(action="/thor/product" method="get")
-        .input-group
-          input.form-control(type='text' name="keyword" placeholder='Search for...' value=keyword)
-          .input-group-append
-            button.btn.btn-primary(type='submit')
-              i.fa.fa-search
     .col-md-6.text-right 
       //- a(href="/thor/product/create" class="btn btn-primary btn-sm") Thêm mới
       //- a(href="/thor/product/import" class="btn btn-secondary btn-sm ml-1") Nhập hàng
-  .row
+  hr
+  .row.mt-3
     .col-md-8
-      .row(style="min-height: 300px; max-height: 400px; background: #f3f3f3; overflow: auto")
+      .row
+        h4 Mặt hàng đã mua
+      .row.cart-area
         .col-md-12
           table.table
             thead
               tr
                 th(scope='col') #
-                th(scope='col') First
-                th(scope='col') Last
-                th(scope='col') Handle
-            tbody
-              tr
-                th(scope='row') 1
-                td Mark
-                td Otto
-                td @mdo
-              tr
-                th(scope='row') 2
-                td Jacob
-                td Thornton
-                td @fat
-              tr
-                th(scope='row') 3
-                td Larry
-                td the Bird
-                td @twitter
-              tr
-                th(scope='row') 3
-                td Larry
-                td the Bird
-                td @twitter
-              tr
-                th(scope='row') 3
-                td Larry
-                td the Bird
-                td @twitter
-              tr
-                th(scope='row') 3
-                td Larry
-                td the Bird
-                td @twitter
-              tr
-                th(scope='row') 3
-                td Larry
-                td the Bird
-                td @twitter
-              tr
-                th(scope='row') 3
-                td Larry
-                td the Bird
-                td @twitter
-              tr
-                th(scope='row') 3
-                td Larry
-                td the Bird
-                td @twitter
-              tr
-                th(scope='row') 3
-                td Larry
-                td the Bird
-                td @twitter
-
-      .row
+                th(scope='col') Tên sản phẩm
+                th(scope='col') Giá
+                th(scope='col') Số lượng
+                th(scope='col') Tổng tiền
+                th(scope='col') Hành động
+            tbody#user-cart
+              //- each n, index in new Array(10).fill(10)
+              //-   tr
+              //-     th(scope='row')= index + 1
+              //-     td Mark
+              //-     td Otto
+              //-     td @mdo
+              
+      hr
+      .row.mt-3
         .col-md-12
           h3 Các mặt hàng
+        .col-md-6
+          form.d-md-inline-block.form-inline.ml-auto.mr-0.mr-md-3.my-2.my-md-0.w-100(action="/thor/product" method="get")
+            .input-group
+              input.form-control(id="input-filter" type='text' name="keyword" placeholder='Search for...' value=keyword oninput="filterProduct()")
+              .input-group-append
+                button.btn.btn-primary(type='submit')
+                  i.fa.fa-search
+      .row.mt-3
+        .col-md-12.product-area
+          each product in products
+            .card.product(id="product_#{product.id}")
+              img.card-img-top.product-image(src='/images/#{product.image}' alt='Card image cap')
+              .card-body
+                .card-body-info
+                  h5.card-title.product-name #{product.name}
+                  p.card-text
+                    span Giá: 
+                    span.text-primary #{product.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}
+                  p.card-text Còn: 
+                    span(class="product-stock_#{product.id}") #{product.stock}
+                //- if product.stock
+                //-   button.btn.btn-sm.btn-success.mt-3.float-right(onclick="pickProduct('#{JSON.stringify(product)}')") chọn
+                //- else
+                //-   button.btn.btn-sm.btn-danger.mt-3.float-right hết hàng
+                button.btn.btn-sm.btn-success.mt-3.float-right.btn-pick(class=product.stock ? "is-btn-block" : "is-btn-hidden" onclick="pickProduct('#{JSON.stringify(product)}')") chọn
+                button.btn.btn-sm.btn-danger.mt-3.float-right.btn-out(class=product.stock ? "is-btn-hidden" : "is-btn-block") hết hàng
+              
     .col-md-4
       .bill-container
         form
@@ -110,7 +91,10 @@ block content
           
           .form-group.row.mt-5
             .col-sm-4.offset-sm-8.text-right
-              button.btn.btn-success.btn-sm.btn-block(type='submit') Thanh toán
+              button.btn.btn-success.btn-sm.btn-block(type='submit' style="min-width: 100px;") Thanh toán
+
+block script
+  script(src="/js/sell.js")
 
 block style
   style.
@@ -131,14 +115,84 @@ block style
     }
 
     .product-image {
-      width: 85px;
-      height: 50px;
+      max-width: 120px;
     }
 
     .table {
-      min-width: 1000px;
+      min-width: 800px;
+    }
+
+    .cart-area {
+      min-height: 200px;
+      max-height: 400px;
+      background: #f3f3f3;
+      overflow: auto;
     }
 
     .bill-container {
       padding: 0 30px;
+    }
+
+    .card {
+      width: 180px;
+      margin-right: 20px;
+      margin-bottom: 20px;
+      padding: 8px 16px;
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-top: 16px;;
+      padding: 0;
+    }
+
+    .card-body button {
+      align-self: flex-end;
+    }
+
+    .card-title {
+      font-size: 16px;
+    }
+
+    .card-text {
+      margin-bottom: 8px;
+      line-height: 1;
+      font-size: 14px;
+    }
+
+    .card img {
+      align-self: center;
+    }
+
+    .product-area {
+      display: flex;
+      flex-wrap: wrap;
+      max-height: 750px;
+      overflow: auto;
+    }
+
+    .product.is-block {
+      display: flex;
+    }
+
+    .product.is-hidden {
+      display: none;
+    }
+
+    .product button.is-btn-block {
+      display: block;
+    }
+
+    .product button.is-btn-hidden {
+      display: none;
+    }
+
+    .user-cart-item button {
+      color: #fff;
+    }
+
+    .user-cart-item button:hover {
+      color: #fff;
     }
