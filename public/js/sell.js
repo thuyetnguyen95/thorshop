@@ -1,7 +1,6 @@
 let userCart = {}
 
 function pickProduct(product) {
-  console.log(product)
   product = JSON.parse(product)
 
   if (typeof userCart[product.id] !== 'undefined') {
@@ -28,7 +27,9 @@ function pickProduct(product) {
 
 
 function increment(id) {
-  if (typeof userCart[id] !== 'undefined') {
+  let productStock = parseInt($(`.product-stock_${id}`).text())
+
+  if (typeof userCart[id] !== 'undefined' && productStock > 0) {
     let qty = userCart[id].qty += 1
     userCart[id].qty = qty
 
