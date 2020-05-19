@@ -117,7 +117,44 @@ function renderUserCart() {
                 `
   }
 
+  setCartToBill()
   $(userCartEl).html(cardDOM)
+}
+
+function setCartToBill() {
+  let userCartArr = Object.values(userCart)
+  let totalPrice = userCartArr.reduce(function(accumulator, cartItem) {
+    accumulator += cartItem.qty * cartItem.price
+
+    return accumulator
+  }, 0)
+
+  let qty = userCartArr.reduce(function(accumulator, cartItem) {
+    accumulator += cartItem.qty
+
+    return accumulator
+  }, 0)
+
+  $('#f_qty').val(qty)
+  $('#f_total_price').val(totalPrice)
+
+  //Reset calc bill
+  $('#f_pay').val('')
+  onChangePay()
+
+  if (!userCartArr.length) {
+    $('#f_pay').val('')
+    $('#f_qty').val('')
+    $('#f_total_price').val('')
+    $('#f_in_debt').val('')
+  }
+}
+
+function onChangePay() {
+  let pay = $('#f_pay').val() || 0
+  let inDebt = parseInt($('#f_total_price').val() - parseInt(pay))
+
+  $('#f_in_debt').val(inDebt)
 }
 
 

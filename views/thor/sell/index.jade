@@ -3,9 +3,6 @@ extends ../layout/master
 block content
   ol.breadcrumb.mb-4.mt-4
     li(class="breadcrumb-item active") Bán hàng
-    .col-md-6.text-right 
-      //- a(href="/thor/product/create" class="btn btn-primary btn-sm") Thêm mới
-      //- a(href="/thor/product/import" class="btn btn-secondary btn-sm ml-1") Nhập hàng
   hr
   .row.mt-3
     .col-md-8
@@ -23,13 +20,6 @@ block content
                 th(scope='col') Tổng tiền
                 th(scope='col') Hành động
             tbody#user-cart
-              //- each n, index in new Array(10).fill(10)
-              //-   tr
-              //-     th(scope='row')= index + 1
-              //-     td Mark
-              //-     td Otto
-              //-     td @mdo
-              
       hr
       .row.mt-3
         .col-md-12
@@ -62,32 +52,49 @@ block content
                 button.btn.btn-sm.btn-danger.mt-3.float-right.btn-out(class=product.stock ? "is-btn-hidden" : "is-btn-block") hết hàng
               
     .col-md-4
+      h3 Thanh toán
       .bill-container
         form
           .form-group.row
-            label.col-sm-4.col-form-label(for='xxx') Tổng số mặt hàng 
+            label.col-sm-4.col-form-label(for='f_qty') Tổng số mặt hàng 
             .col-sm-8
-              input#xxx.form-control(type='number' autocomplete="off")
+              input#f_qty.form-control(type='number' readonly name="qty")
           
           .form-group.row
-            label.col-sm-4.col-form-label(for='xxx') Tổng tiền
+            label.col-sm-4.col-form-label(for='f_total_price') Tổng tiền
             .col-sm-8
-              input#xxx.form-control(type='number' autocomplete="off")
+              .input-group.mb-3
+                .input-group-prepend
+                  span.input-group-text $
+                input#f_total_price.form-control(type='number' readonly name="total_price" aria-label='Amount (to the nearest dollar)')
+                .input-group-append
+                  span.input-group-text đ
+
           
           .form-group.row
-            label.col-sm-4.col-form-label(for='number') Nợ
+            label.col-sm-4.col-form-label(for='f_pay') Thanh toán
             .col-sm-8
-              input#xxx.form-control(type='text' autocomplete="off")
+              .input-group.mb-3
+                .input-group-prepend
+                  span.input-group-text $
+                input#f_pay.form-control(type='number' autocomplete="off" name="pay" oninput="onChangePay()")
+                .input-group-append
+                  span.input-group-text đ
           
           .form-group.row
-            label.col-sm-4.col-form-label(for='xxx') Note
+            label.col-sm-4.col-form-label(for='f_in_debt') Nợ
             .col-sm-8
-              input#xxx.form-control(type='text' autocomplete="off")
+              .input-group.mb-3
+                .input-group-prepend
+                  span.input-group-text $
+                input#f_in_debt.form-control(type='number' autocomplete="off" name="in_debt" readonly)
+                .input-group-append
+                  span.input-group-text đ
           
           .form-group.row
-            label.col-sm-4.col-form-label(for='xxx') Something
+            label.col-sm-4.col-form-label(for='f_note') Note
             .col-sm-8
-              input#xxx.form-control(type='text' autocomplete="off")
+              textarea#f_note.form-control(autocomplete="off" name="note")
           
           .form-group.row.mt-5
             .col-sm-4.offset-sm-8.text-right
@@ -130,7 +137,8 @@ block style
     }
 
     .bill-container {
-      padding: 0 30px;
+      padding: 35px 30px;
+      background-color: #e2ffe3
     }
 
     .card {
