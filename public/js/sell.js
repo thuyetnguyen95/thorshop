@@ -1,5 +1,10 @@
 let userCart = {}
 
+/**
+ * Handle pick product to cart
+ * 
+ * @param {Object} product 
+ */
 function pickProduct(product) {
   product = JSON.parse(product)
 
@@ -25,7 +30,11 @@ function pickProduct(product) {
   renderUserCart()
 }
 
-
+/**
+ * Handle click increment button on cart list
+ * 
+ * @param {String} id 
+ */
 function increment(id) {
   let productStock = parseInt($(`.product-stock_${id}`).text())
 
@@ -38,6 +47,11 @@ function increment(id) {
   }
 }
 
+/**
+ * Handle click decrement button on cart list
+ * 
+ * @param {String} id 
+ */
 function decrement(id) {
   let qty = 0
   if (typeof userCart[id] !== 'undefined') {
@@ -54,6 +68,11 @@ function decrement(id) {
   }
 }
 
+/**
+ * Handle remove item on cart
+ * 
+ * @param {String} id 
+ */
 function remove(id) {
   setStock(id, true, userCart[id].qty)
 
@@ -62,6 +81,13 @@ function remove(id) {
   renderUserCart()
 }
 
+/**
+ * Re-set stock on products list
+ * 
+ * @param {String} id 
+ * @param {Boolean} isIncrement 
+ * @param {Int, String} qtyRestore 
+ */
 function setStock(id, isIncrement = true, qtyRestore = 0) {
   let productStock = parseInt($(`.product-stock_${id}`).text())
 
@@ -90,6 +116,9 @@ function setStock(id, isIncrement = true, qtyRestore = 0) {
   $(`.product-stock_${id}`).text(productStock)
 }
 
+/**
+ * Render cart with product choosed
+ */
 function renderUserCart() {
   let userCartEl = $('#user-cart')
   let cardDOM = ''
@@ -119,8 +148,45 @@ function renderUserCart() {
 
   setCartToBill()
   $(userCartEl).html(cardDOM)
+  allowSubmitPay()
+  setCartInfo()
 }
 
+/**
+ * Check button submit is available
+ */
+function allowSubmitPay() {
+  let inDebt = parseInt($('#f_total_price').val() || 0) - parseInt($('#f_pay').val() || 0)
+
+  let userCartArr = Object.values(userCart)
+  if (userCartArr.length && inDebt >= 0) {
+    $('#btnSubmitPay').removeAttr('disabled')
+  } else {
+    $('#btnSubmitPay').attr('disabled','disabled')
+  }
+}
+
+/**
+ * Set cart info to submit
+ */
+function setCartInfo() {
+  let userCartArr = Object.values(userCart)
+  
+  let productInfo = []
+  for (let i = 0; i < userCartArr.length; i++) {
+    productInfo.push({
+      id: userCartArr[i].id,
+      qty: userCartArr[i].qty,
+      price: userCartArr[i].price
+    })
+  }
+
+  $('#productInfo').val(JSON.stringify(productInfo))
+}
+
+/**
+ * Set cart info to bill (qty, total price, pay...)
+ */
 function setCartToBill() {
   let userCartArr = Object.values(userCart)
   let totalPrice = userCartArr.reduce(function(accumulator, cartItem) {
@@ -147,18 +213,32 @@ function setCartToBill() {
     $('#f_qty').val('')
     $('#f_total_price').val('')
     $('#f_in_debt').val('')
+    $('#f_refund').val('')
   }
 }
 
+/**
+ * Handle input pay
+ */
 function onChangePay() {
-  let pay = $('#f_pay').val() || 0
-  let inDebt = parseInt($('#f_total_price').val() - parseInt(pay))
+  let pay = parseInt($('#f_pay').val()) || 0
+  let totalPrice = parseInt($('#f_total_price').val())  || 0
 
-  $('#f_in_debt').val(inDebt)
+  if (pay > totalPrice) {
+    $('#f_refund').val(pay - totalPrice)
+    $('#f_in_debt').val('')
+  } else {
+    $('#f_in_debt').val(totalPrice - pay)
+    $('#f_refund').val('')
+  }
+
+  allowSubmitPay()
 }
 
 
-// Filter product
+/**
+ * Handle filter products
+ */
 function filterProduct() {
   let keyword = $('#input-filter').val().trim() || ''
   let productEls = $('.product')
@@ -183,6 +263,14 @@ function filterProduct() {
   }
 }
 
+/**
+ * Convert Vietnamese character with mark
+ * 
+ * Source: https://gist.github.com/bluzky/b8c205c98ff3318907b30c3e0da4bf3f
+ * Auth: bluzky
+ * 
+ * @param {String} str 
+ */
 function stringToSlug(str) {
   var from = "àáãảạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệđùúủũụưừứửữựòóỏõọôồốổỗộơờớởỡợìíỉĩịäëïîöüûñç",
     to = "aaaaaaaaaaaaaaaaaeeeeeeeeeeeduuuuuuuuuuuoooooooooooooooooiiiiiaeiiouunc";

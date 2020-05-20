@@ -41,6 +41,16 @@ const findByCategoryId = (categoryId) => {
   return products || []
 }
 
+const sold = (id, qty) => {
+  let product = findById(id)
+  
+  if (!product) return
+
+  product.stock -= qty
+
+  return update(id, product)
+}
+
 module.exports = {
   save,
   all,
@@ -48,4 +58,5 @@ module.exports = {
   remove,
   findById,
   findByCategoryId,
+  sold,
 }
