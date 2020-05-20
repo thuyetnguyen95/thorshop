@@ -36,9 +36,11 @@ module.exports = {
     return res.redirect('/thor/sell')
   },
 
-  // storeCategory: (req, res) => {
+  indexSold: (req, res) => {
+    let sold = Sell.all()
 
-  // },
+    res.render("thor/sell/sold", { sold });
+  },
 
   // editCategory: (req, res) => {
 

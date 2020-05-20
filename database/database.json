@@ -10,7 +10,7 @@
     {
       "id": "CSvr_j9tW",
       "name": "Bánh mì đậu đỏ",
-      "stock": 50,
+      "stock": 49,
       "price": 8000,
       "expiryAt": "2020-06-13",
       "categoryId": "YVWyflYEx",
@@ -20,7 +20,7 @@
     {
       "id": "Oqp1KRi5G",
       "name": "oishi",
-      "stock": 20,
+      "stock": 17,
       "price": 6000,
       "expiryAt": "2020-06-13",
       "categoryId": "R5l-BYsuD",
@@ -66,5 +66,39 @@
       "name": "Loại khác"
     }
   ],
-  "sell": []
+  "sell": [
+    {
+      "totalPrice": 20000,
+      "pay": 19000,
+      "inDebt": 1000,
+      "note": "",
+      "productInfo": [
+        {
+          "id": "CSvr_j9tW",
+          "qty": 1,
+          "price": 8000
+        },
+        {
+          "id": "Oqp1KRi5G",
+          "qty": 2,
+          "price": 6000
+        }
+      ],
+      "createdAt": "2020-05-20T11:04:29.261Z"
+    },
+    {
+      "totalPrice": 6000,
+      "pay": 0,
+      "inDebt": 6000,
+      "note": "",
+      "productInfo": [
+        {
+          "id": "Oqp1KRi5G",
+          "qty": 1,
+          "price": 6000
+        }
+      ],
+      "createdAt": "2020-05-20T11:05:20.405Z"
+    }
+  ]
 }

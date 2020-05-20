@@ -6,7 +6,7 @@ const save = (sellInfo) => {
 
   sellInfo.createdAt = new Date()
 
-  db.get('sell').push(sellInfo).write()
+  db.get('sell').push({id, ...sellInfo}).write()
 
   return findById(id)
 }
