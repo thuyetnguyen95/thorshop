@@ -13,3 +13,7 @@
 .chip.chip-danger {
   background-color: #dc3545;
 }
+
+.form-control:focus {
+  box-shadow: unset!important;
+}
