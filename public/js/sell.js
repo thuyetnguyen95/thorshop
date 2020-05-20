@@ -156,7 +156,7 @@ function renderUserCart() {
  * Check button submit is available
  */
 function allowSubmitPay() {
-  let inDebt = parseInt($('#f_total_price').val() || 0) - parseInt($('#f_pay').val() || 0)
+  let inDebt = parseInt($('#f_in_debt').val() || 0)
 
   let userCartArr = Object.values(userCart)
   if (userCartArr.length && inDebt >= 0) {
