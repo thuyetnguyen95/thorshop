@@ -156,8 +156,10 @@ function renderUserCart() {
  * Check button submit is available
  */
 function allowSubmitPay() {
+  let inDebt = parseInt($('#f_total_price').val() || 0) - parseInt($('#f_pay').val() || 0)
+
   let userCartArr = Object.values(userCart)
-  if (userCartArr.length) {
+  if (userCartArr.length && inDebt >= 0) {
     $('#btnSubmitPay').removeAttr('disabled')
   } else {
     $('#btnSubmitPay').attr('disabled','disabled')
@@ -178,7 +180,7 @@ function setCartInfo() {
       price: userCartArr[i].price
     })
   }
-console.log(productInfo, JSON.stringify(productInfo))
+
   $('#productInfo').val(JSON.stringify(productInfo))
 }
 
@@ -211,6 +213,7 @@ function setCartToBill() {
     $('#f_qty').val('')
     $('#f_total_price').val('')
     $('#f_in_debt').val('')
+    $('#f_refund').val('')
   }
 }
 
@@ -218,10 +221,18 @@ function setCartToBill() {
  * Handle input pay
  */
 function onChangePay() {
-  let pay = $('#f_pay').val() || 0
-  let inDebt = parseInt($('#f_total_price').val() - parseInt(pay))
+  let pay = parseInt($('#f_pay').val()) || 0
+  let totalPrice = parseInt($('#f_total_price').val())  || 0
 
-  $('#f_in_debt').val(inDebt)
+  if (pay > totalPrice) {
+    $('#f_refund').val(pay - totalPrice)
+    $('#f_in_debt').val('')
+  } else {
+    $('#f_in_debt').val(totalPrice - pay)
+    $('#f_refund').val('')
+  }
+
+  allowSubmitPay()
 }
 
 

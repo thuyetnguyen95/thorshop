@@ -17,6 +17,12 @@ const all = () => {
   return sold.length ? sold : []
 }
 
+const findById = (id) => {
+  let sold = db.get('sell').find({id}).value()
+
+  return sold || null
+}
+
 module.exports = {
   save,
   all,

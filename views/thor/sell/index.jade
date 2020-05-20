@@ -90,7 +90,17 @@ block content
                 input#f_in_debt.form-control(type='number' autocomplete="off" name="in_debt" readonly)
                 .input-group-append
                   span.input-group-text đ
-          
+
+          .form-group.row
+            label.col-sm-4.col-form-label(for='f_in_debt') Trả lại
+            .col-sm-8
+              .input-group.mb-3
+                .input-group-prepend
+                  span.input-group-text $
+                input#f_refund.form-control(type='number' readonly)
+                .input-group-append
+                  span.input-group-text đ
+
           .form-group.row
             label.col-sm-4.col-form-label(for='f_note') Note
             .col-sm-8

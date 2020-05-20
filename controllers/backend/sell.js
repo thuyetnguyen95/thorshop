@@ -1,4 +1,4 @@
-const Category = require("../../models/category");
+const Sell = require("../../models/sell");
 const Product = require("../../models/product");
 
 module.exports = {
@@ -11,14 +11,29 @@ module.exports = {
   },
 
   storeSell: (req, res) => {
-    let totalPrice = req.body.total_price
-    let pay = req.body.pay
-    let inDebt = req.body.in_debt
+    let totalPrice = parseInt(req.body.total_price || 0)
+    let pay = parseInt(req.body.pay || 0)
+    let inDebt = parseInt(req.body.in_debt || 0)
     let note = req.body.note
-    let productInfo = req.body.productInfo
+    let productInfo = JSON.parse(req.body.productInfo)
 
-    console.log(req.body)
+    try {
+      productInfo.forEach(product => {
+        Product.sold(product.id, product.qty)
+      });
 
+      Sell.save({
+        totalPrice,
+        pay,
+        inDebt,
+        note,
+        productInfo,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+
+    return res.redirect('/thor/sell')
   },
 
   // storeCategory: (req, res) => {
