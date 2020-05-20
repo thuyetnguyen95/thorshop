@@ -25,7 +25,7 @@ block content
         .col-md-12
           h3 Các mặt hàng
         .col-md-6
-          form.d-md-inline-block.form-inline.ml-auto.mr-0.mr-md-3.my-2.my-md-0.w-100(action="/thor/product" method="get")
+          form.d-md-inline-block.form-inline.ml-auto.mr-0.mr-md-3.my-2.my-md-0.w-100
             .input-group
               input.form-control(id="input-filter" type='text' name="keyword" placeholder='Search for...' value=keyword oninput="filterProduct()")
               .input-group-append
@@ -54,7 +54,7 @@ block content
     .col-md-4
       h3 Thanh toán
       .bill-container
-        form
+        form(action="/thor/sell/store" method="post")
           .form-group.row
             label.col-sm-4.col-form-label(for='f_qty') Tổng số mặt hàng 
             .col-sm-8
@@ -95,10 +95,12 @@ block content
             label.col-sm-4.col-form-label(for='f_note') Note
             .col-sm-8
               textarea#f_note.form-control(autocomplete="off" name="note")
+
+          input#productInfo(type="hidden" name="productInfo")
           
           .form-group.row.mt-5
             .col-sm-4.offset-sm-8.text-right
-              button.btn.btn-success.btn-sm.btn-block(type='submit' style="min-width: 100px;") Thanh toán
+              button#btnSubmitPay.btn.btn-success.btn-sm.btn-block(type='submit' style="min-width: 100px;" disabled) Thanh toán
 
 block script
   script(src="/js/sell.js")

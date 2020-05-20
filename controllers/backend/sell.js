@@ -10,9 +10,16 @@ module.exports = {
     });
   },
 
-  // createCategory: (req, res) => {
-  //   res.render('thor/sell/create')
-  // },
+  storeSell: (req, res) => {
+    let totalPrice = req.body.total_price
+    let pay = req.body.pay
+    let inDebt = req.body.in_debt
+    let note = req.body.note
+    let productInfo = req.body.productInfo
+
+    console.log(req.body)
+
+  },
 
   // storeCategory: (req, res) => {
 
