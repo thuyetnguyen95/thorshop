@@ -21,83 +21,26 @@ block content
           | This call to action card is a great place to showcase some important information or display a clever tagline!
     // Content Row
     .row
-      .col-md-4.mb-5
-        .card.h-100
-          .card-body
-            h2.card-title Card One
-            p.card-text
-              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.
-          .card-footer
-            a.btn.btn-primary.btn-sm(href='#') More Info
-      // /.col-md-4
-      .col-md-4.mb-5
-        .card.h-100
-          .card-body
-            h2.card-title Card Two
-            p.card-text
-              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.
-          .card-footer
-            a.btn.btn-primary.btn-sm(href='#') More Info
-      // /.col-md-4
-      .col-md-4.mb-5
-        .card.h-100
-          .card-body
-            h2.card-title Card Three
-            p.card-text
-              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.
-          .card-footer
-            a.btn.btn-primary.btn-sm(href='#') More Info
-    .row
-      .col-md-4.mb-5
-        .card.h-100
-          .card-body
-            h2.card-title Card One
-            p.card-text
-              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.
-          .card-footer
-            a.btn.btn-primary.btn-sm(href='#') More Info
-      // /.col-md-4
-      .col-md-4.mb-5
-        .card.h-100
-          .card-body
-            h2.card-title Card Two
-            p.card-text
-              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.
-          .card-footer
-            a.btn.btn-primary.btn-sm(href='#') More Info
-      // /.col-md-4
-      .col-md-4.mb-5
-        .card.h-100
-          .card-body
-            h2.card-title Card Three
-            p.card-text
-              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.
-          .card-footer
-            a.btn.btn-primary.btn-sm(href='#') More Info
-     .row
-      .col-md-4.mb-5
-        .card.h-100
-          .card-body
-            h2.card-title Card One
-            p.card-text
-              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.
-          .card-footer
-            a.btn.btn-primary.btn-sm(href='#') More Info
-      // /.col-md-4
-      .col-md-4.mb-5
-        .card.h-100
-          .card-body
-            h2.card-title Card Two
-            p.card-text
-              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod tenetur ex natus at dolorem enim! Nesciunt pariatur voluptatem sunt quam eaque, vel, non in id dolore voluptates quos eligendi labore.
-          .card-footer
-            a.btn.btn-primary.btn-sm(href='#') More Info
-      // /.col-md-4
-      .col-md-4.mb-5
-        .card.h-100
-          .card-body
-            h2.card-title Card Three
-            p.card-text
-              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem magni quas ex numquam, maxime minus quam molestias corporis quod, ea minima accusamus.
-          .card-footer
-            a.btn.btn-primary.btn-sm(href='#') More Info
+      each product in products
+        .col-md-3.mb-3
+          .card.h-100
+            img.card-img-top.product-image(src="images/#{product.image}" alt="Card image cap" class="")
+            .card-body
+              h5.card-title.text-capitalize= product.name
+              p.card-text
+                span Giá 
+                span.text-primary #{product.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}
+              p.card-text
+                if !product.stock
+                  span Trạng thái: 
+                  span.text-danger Đã hết
+                else
+                  span Trạng thái: 
+                  span(class="#{product.stock > 5 ? 'text-success' : 'text-warning' }") #{product.stock > 5 ? 'Đang còn' : 'Sắp hết'}
+            .card-footer
+              a.btn.btn-primary.btn-sm(href='#') More Info
+      
+
+block style
+  style.
+    
