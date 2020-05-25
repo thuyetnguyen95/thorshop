@@ -11,9 +11,21 @@ block content
           .input-group-append
             button.btn.btn-primary(type='submit')
               i.fa.fa-search
-    .col-md-6.text-right 
-      a(href="/thor/product/import" class="btn btn-info btn-sm") Nhập hàng
-      a(href="/thor/product/create" class="btn btn-primary btn-sm ml-1") Thêm mới
+    .col-md-6
+      nav.float-right
+          ul.pagination
+            li.page-item
+              a.page-link(href='#' aria-label='Previous')
+                span(aria-hidden='true') &laquo;
+                span.sr-only Previous
+                - for (var page = 1; page <= totalPage; ++page) {
+                    li.page-item(class="#{currentPage === page ? 'active' : '' }")
+                      a.page-link(href='?p=#{page}')= page
+                - }
+              a.page-link(href='#' aria-label='Next')
+                span(aria-hidden='true') &raquo;
+                span.sr-only Next
+
   .row
     .col-md-12
       .table-responsive
@@ -21,11 +33,13 @@ block content
           thead
             tr
               th(scope='col' class="thead-id") #
-              th(scope='col' class="thead-image") Hình ảnh
-              th(scope='col') Tên
-              th(scope='col' class="thead-stock") Số lượng
-              th(scope='col' class="thead-price") Giá bán
+              th(scope='col' class="thead-user") Người mua
+              th(scope='col' class="thead-products") Sản phẩm đã mua
+              th(scope='col' class="thead-price") Tổng tiền
+              th(scope='col' class="thead-pay") Thanh toán
               th(scope='col' class="thead-status") Trạng thái
+              th(scope='col' class="thead-created-at") Ngày mua
+              th(scope='col' class="thead-note") Note
               th(scope='col' class="thead-action") Tác vụ
           tbody
             if sold.length
@@ -33,40 +47,75 @@ block content
                 tr
                   td= index + 1
                   td
-                    //- img(class="product-image" src="/images/#{product.image}")
-                  td.td-name= item.totalPrice
-                  td.td-name= item.pay
-            //-       td= product.stock
-            //-       td= product.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})
-            //-       td
-            //-         span(class="chip #{product.status.class}")= product.status.text
-            //-       td
-            //-         a(href="/thor/product/edit/#{product.id}" class="btn btn-info btn-sm") Sửa
-            //-         a(href="/thor/product/delete/#{product.id}" class="btn btn-danger btn-sm ml-1") Xóa
+                  td
+                    each productBought, prodIdx in item.productInfo
+                      a.text-capitalize(href="#")= (products.filter(product => product.id === productBought.id)[0].name + `${item.productInfo.length !== prodIdx + 1 ? ', ': ''}`)
+                  td= item.totalPrice.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})
+                  td= item.pay.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})
 
+                  td 
+                    span(class="#{item.inDebt ? 'chip chip-warning ' : 'chip chip-success'}")= item.inDebt ? 'nợ: ' + item.inDebt.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) : 'đã thanh toán'
+
+                  td= item.createdAt
+                  td= item.note
+                  td.td-action
+                    a(href="#" class="btn btn-info btn-sm") Sửa
+                    button.btn.btn-danger.btn-sm.ml-1(type='button' data-toggle='modal' data-target='#modalConfirm') Xóa
+    hr
+    .col-md-12
+      nav(aria-label='Page navigation example')
+        ul.pagination
+          li.page-item
+            a.page-link(href='#' aria-label='Previous')
+              span(aria-hidden='true') &laquo;
+              span.sr-only Previous
+              - for (var page = 1; page <= totalPage; ++page) {
+                  li.page-item
+                    a.page-link(href='?p=#{page}')= page
+              - }
+            a.page-link(href='#' aria-label='Next')
+              span(aria-hidden='true') &raquo;
+              span.sr-only Next
+  // Modal
+  #modalConfirm.modal.fade(tabindex='-1' role='dialog' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-sm(role='document')
+      .modal-content
+        .modal-header
+          h5#exampleModalLongTitle.modal-title Hmmmmmm!
+          button.close(type='button' data-dismiss='modal' aria-label='Close')
+            span(aria-hidden='true') &times;
+        .modal-body
+          //- | Thao tác này không thể hoàn tác.
+          //- | Bạn có chắc chắn muốn xoá?
+          | Feature is under construction!
+        .modal-footer
+          //- button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+          button.btn.btn-danger.btn-sm(type='button') Xoá
 
 block style
   style.
     .thead-id {
-        width: 50px;
+      min-width: 50px;
     }
 
-    .thead-image {
-      width: 150px;
+    .thead-action {
+      min-width: 115px;
     }
 
-    .thead-stock, .thead-price, .thead-status, .thead-action {
-      width: 200px;
+    .thead-status, .thead-price, .thead-pay {
+      min-width: 150px;
     }
 
-    .td-name {
-      text-transform: capitalize;
-      min-width: 250px;
+    .thead-user {
+      min-width: 200px;
     }
 
-    .product-image {
-      width: 85px;
-      height: 50px;
+    .thead-created-at {
+      min-width: 200px;
+    }
+
+    .thead-products {
+      min-width: 300px;
     }
 
     .table {

@@ -24,6 +24,7 @@ block content
               th(scope='col' class="thead-image") Hình ảnh
               th(scope='col') Tên
               th(scope='col' class="thead-stock") Số lượng
+              th(scope='col' class="thead-stock") Đã bán
               th(scope='col' class="thead-price") Giá bán
               th(scope='col' class="thead-status") Trạng thái
               th(scope='col' class="thead-action") Tác vụ
@@ -36,6 +37,7 @@ block content
                     img(class="product-image" src="/images/#{product.image}")
                   td.td-name= product.name
                   td= product.stock
+                  td= product.sold
                   td= product.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})
                   td
                     span(class="chip #{product.status.class}")= product.status.text
@@ -47,15 +49,17 @@ block content
 block style
   style.
     .thead-id {
-        width: 50px;
+      min-width: 50px;
+      width: 50px;
     }
 
     .thead-image {
+      min-width: 150px;
       width: 150px;
     }
 
     .thead-stock, .thead-price, .thead-status, .thead-action {
-      width: 200px;
+      min-width: 200px;
     }
 
     .td-name {
@@ -64,6 +68,7 @@ block style
     }
 
     .product-image {
+      min-width: 85px;
       width: 85px;
       height: 50px;
     }

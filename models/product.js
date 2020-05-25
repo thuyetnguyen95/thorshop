@@ -1,10 +1,12 @@
 const shortid  = require('shortid')
 const db = require('../database/db')
+const DateHelper = require('../utils/date')
 
 const save = (product) => {
   const id = shortid.generate()
   
-  product.addedAt = new Date()
+  product.addedAt = DateHelper.generateTodayDate()
+  product.sold = 0
 
   db.get('products').push({id, ...product}).write()
 
@@ -47,6 +49,7 @@ const sold = (id, qty) => {
   if (!product) return
 
   product.stock -= qty
+  product.sold += qty
 
   return update(id, product)
 }
