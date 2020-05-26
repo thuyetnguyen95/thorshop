@@ -3,28 +3,22 @@ extends ../layout/master
 block content
   ol.breadcrumb.mb-4.mt-4
     li(class="breadcrumb-item active") Sản phẩm
-  .row.mb-4.mt-4
-    .col-md-6
-      form.d-md-inline-block.form-inline.ml-auto.mr-0.mr-md-3.my-2.my-md-0.w-50(action="/thor/product" method="get")
-        .input-group
-          input.form-control(type='text' name="keyword" placeholder='Search for...' value=keyword)
-          .input-group-append
-            button.btn.btn-primary(type='submit')
-              i.fa.fa-search
-    .col-md-6
-      nav.float-right
-          ul.pagination
-            li.page-item
-              a.page-link(href='#' aria-label='Previous')
-                span(aria-hidden='true') &laquo;
-                span.sr-only Previous
-                - for (var page = 1; page <= totalPage; ++page) {
-                    li.page-item(class="#{currentPage === page ? 'active' : '' }")
-                      a.page-link(href='?p=#{page}')= page
-                - }
-              a.page-link(href='#' aria-label='Next')
-                span(aria-hidden='true') &raquo;
-                span.sr-only Next
+  form.d-md-inline-block.form-inline.ml-auto.mr-0.mr-md-3.my-2.my-md-0.w-100(action="/thor/sell/sold" method="get")
+    input(type="hidden" name="p" value=currentPage)
+    .row.mb-4
+      .col-md-3.w-100
+          .input-group
+            input.form-control(type='text' name="keyword" placeholder='Tên người mua...' value=keyword autocomplete="off")
+      .col-md-2
+        select.form-control.w-100(name="status")
+          option(value='') -- Trạng thái --
+          option(value=1 selected=status === 1) Đang nợ
+          option(value=2 selected=status === 2) Đã thanh toán
+      .col-md-2
+        input.form-control.w-100(type="date" name="date" value=date)
+      .my-auto
+        button.btn.btn-primary.btn-sm(type='submit') Tìm kiếm
+        a.btn.btn-secondary.btn-sm.ml-2(href="/thor/sell/sold?p=#{currentPage}") Clear
 
   .row
     .col-md-12
@@ -59,23 +53,25 @@ block content
                   td= item.createdAt
                   td= item.note
                   td.td-action
-                    a(href="#" class="btn btn-info btn-sm") Sửa
+                    a(href="#" class="btn btn-info btn-sm" data-toggle='modal' data-target='#modalConfirm') Sửa
                     button.btn.btn-danger.btn-sm.ml-1(type='button' data-toggle='modal' data-target='#modalConfirm') Xóa
-    hr
-    .col-md-12
-      nav(aria-label='Page navigation example')
-        ul.pagination
-          li.page-item
-            a.page-link(href='#' aria-label='Previous')
-              span(aria-hidden='true') &laquo;
-              span.sr-only Previous
-              - for (var page = 1; page <= totalPage; ++page) {
-                  li.page-item
-                    a.page-link(href='?p=#{page}')= page
-              - }
-            a.page-link(href='#' aria-label='Next')
-              span(aria-hidden='true') &raquo;
-              span.sr-only Next
+  hr
+  .row
+    .col-md-6.offset-md-6
+      nav.float-right
+        if totalPage > 1
+          ul.pagination
+            li.page-item
+              a.page-link(href="?p=#{currentPage > 1 ? currentPage - 1 : currentPage}&keyword=#{keyword}&status=#{status}&date=#{date}" aria-label='Previous')
+                span(aria-hidden='true') &laquo;
+                span.sr-only Previous
+                - for (var page = 1; page <= totalPage; ++page) {
+                    li.page-item(class="#{currentPage === page ? 'active' : '' }")
+                      a.page-link(href='?p=#{page}&keyword=#{keyword}&status=#{status}&date=#{date}')= page
+                - }
+              a.page-link(href="?p=#{currentPage < totalPage ? currentPage + 1 : totalPage}&keyword=#{keyword}&status=#{status}&date=#{date}" aria-label='Next')
+                span(aria-hidden='true') &raquo;
+                span.sr-only Next
   // Modal
   #modalConfirm.modal.fade(tabindex='-1' role='dialog' aria-hidden='true')
     .modal-dialog.modal-dialog-centered.modal-sm(role='document')
@@ -87,10 +83,11 @@ block content
         .modal-body
           //- | Thao tác này không thể hoàn tác.
           //- | Bạn có chắc chắn muốn xoá?
-          | Feature is under construction!
+          p Feature is under construction.
+          p Please comback later!
         .modal-footer
-          //- button.btn.btn-secondary(type='button' data-dismiss='modal') Close
-          button.btn.btn-danger.btn-sm(type='button') Xoá
+          button.btn.btn-secondary.btn-sm(type='button' data-dismiss='modal') Close
+          //- button.btn.btn-danger.btn-sm(type='button') Xoá
 
 block style
   style.

@@ -1,6 +1,7 @@
 const shortid  = require('shortid')
 const db = require('../database/db')
 const DateHelper = require('../utils/date')
+const { ITEM_PER_PAGE } = require('../utils/constant')
 
 const save = (sellInfo) => {
   const id = shortid.generate()
@@ -14,11 +15,11 @@ const save = (sellInfo) => {
 
 const paginate = (page = 0) => {
   if (!page || page === 1) {
-    return db.get('sell').slice(-2).value()  
+    return db.get('sell').slice(-ITEM_PER_PAGE).value()  
   }
 
   let sold = db.get('sell')
-    .slice(page * -2, (page * -2) + 2)
+    .slice(page * -ITEM_PER_PAGE, (page * -ITEM_PER_PAGE) + ITEM_PER_PAGE)
     .value()
 
   return sold.length ? sold : []

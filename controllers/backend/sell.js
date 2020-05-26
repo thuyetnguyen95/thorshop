@@ -1,13 +1,12 @@
 const Sell = require("../../models/sell");
 const Product = require("../../models/product");
+const { ITEM_PER_PAGE } = require('../../utils/constant')
 
 module.exports = {
   indexSell: (req, res) => {
     let products = Product.all()
 
-    res.render("thor/sell/index", {
-      products
-    });
+    res.render("thor/sell/index", { products });
   },
 
   storeSell: (req, res) => {
@@ -37,13 +36,25 @@ module.exports = {
   },
 
   indexSold: (req, res) => {
+    let keyword = req.query.keyword || ''
+    let status = parseInt(req.query.status || 0) || ''
+    let date = req.query.date || ''
+
     let totalRecord = Sell.totalRecord()
-    let totalPage = totalRecord / 2
+    let totalPage = Math.ceil(totalRecord / ITEM_PER_PAGE)
     let page = parseInt(req.query.p || 1)
     let sold = Sell.paginate(page)
     let products = Product.all()
 
-    res.render("thor/sell/sold", { products, sold: [...sold].reverse(), totalPage, currentPage: page });
+    res.render("thor/sell/sold", {
+      products,
+      sold: [...sold].reverse(),
+      totalPage,
+      currentPage: page,
+      keyword,
+      status,
+      date
+    });
   },
 
   // editCategory: (req, res) => {
