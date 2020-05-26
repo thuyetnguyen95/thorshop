@@ -1,6 +1,5 @@
 const Product = require('../../models/product')
 const Category = require('../../models/category')
-
 const uploadModule = require('../../utils/upload')
 
 const getProductStatus = (product) => {

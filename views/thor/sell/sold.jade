@@ -1,0 +1,123 @@
+extends ../layout/master
+
+block content
+  ol.breadcrumb.mb-4.mt-4
+    li(class="breadcrumb-item active") Sản phẩm
+  .row.mb-4.mt-4
+    .col-md-6
+      form.d-md-inline-block.form-inline.ml-auto.mr-0.mr-md-3.my-2.my-md-0.w-50(action="/thor/product" method="get")
+        .input-group
+          input.form-control(type='text' name="keyword" placeholder='Search for...' value=keyword)
+          .input-group-append
+            button.btn.btn-primary(type='submit')
+              i.fa.fa-search
+    .col-md-6
+      nav.float-right
+          ul.pagination
+            li.page-item
+              a.page-link(href='#' aria-label='Previous')
+                span(aria-hidden='true') &laquo;
+                span.sr-only Previous
+                - for (var page = 1; page <= totalPage; ++page) {
+                    li.page-item(class="#{currentPage === page ? 'active' : '' }")
+                      a.page-link(href='?p=#{page}')= page
+                - }
+              a.page-link(href='#' aria-label='Next')
+                span(aria-hidden='true') &raquo;
+                span.sr-only Next
+
+  .row
+    .col-md-12
+      .table-responsive
+        table.table.table-hover
+          thead
+            tr
+              th(scope='col' class="thead-id") #
+              th(scope='col' class="thead-user") Người mua
+              th(scope='col' class="thead-products") Sản phẩm đã mua
+              th(scope='col' class="thead-price") Tổng tiền
+              th(scope='col' class="thead-pay") Thanh toán
+              th(scope='col' class="thead-status") Trạng thái
+              th(scope='col' class="thead-created-at") Ngày mua
+              th(scope='col' class="thead-note") Note
+              th(scope='col' class="thead-action") Tác vụ
+          tbody
+            if sold.length
+            each item, index in sold
+                tr
+                  td= index + 1
+                  td
+                  td
+                    each productBought, prodIdx in item.productInfo
+                      a.text-capitalize(href="#")= (products.filter(product => product.id === productBought.id)[0].name + `${item.productInfo.length !== prodIdx + 1 ? ', ': ''}`)
+                  td= item.totalPrice.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})
+                  td= item.pay.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})
+
+                  td 
+                    span(class="#{item.inDebt ? 'chip chip-warning ' : 'chip chip-success'}")= item.inDebt ? 'nợ: ' + item.inDebt.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) : 'đã thanh toán'
+
+                  td= item.createdAt
+                  td= item.note
+                  td.td-action
+                    a(href="#" class="btn btn-info btn-sm") Sửa
+                    button.btn.btn-danger.btn-sm.ml-1(type='button' data-toggle='modal' data-target='#modalConfirm') Xóa
+    hr
+    .col-md-12
+      nav(aria-label='Page navigation example')
+        ul.pagination
+          li.page-item
+            a.page-link(href='#' aria-label='Previous')
+              span(aria-hidden='true') &laquo;
+              span.sr-only Previous
+              - for (var page = 1; page <= totalPage; ++page) {
+                  li.page-item
+                    a.page-link(href='?p=#{page}')= page
+              - }
+            a.page-link(href='#' aria-label='Next')
+              span(aria-hidden='true') &raquo;
+              span.sr-only Next
+  // Modal
+  #modalConfirm.modal.fade(tabindex='-1' role='dialog' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-sm(role='document')
+      .modal-content
+        .modal-header
+          h5#exampleModalLongTitle.modal-title Hmmmmmm!
+          button.close(type='button' data-dismiss='modal' aria-label='Close')
+            span(aria-hidden='true') &times;
+        .modal-body
+          //- | Thao tác này không thể hoàn tác.
+          //- | Bạn có chắc chắn muốn xoá?
+          | Feature is under construction!
+        .modal-footer
+          //- button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+          button.btn.btn-danger.btn-sm(type='button') Xoá
+
+block style
+  style.
+    .thead-id {
+      min-width: 50px;
+    }
+
+    .thead-action {
+      min-width: 115px;
+    }
+
+    .thead-status, .thead-price, .thead-pay {
+      min-width: 150px;
+    }
+
+    .thead-user {
+      min-width: 200px;
+    }
+
+    .thead-created-at {
+      min-width: 200px;
+    }
+
+    .thead-products {
+      min-width: 300px;
+    }
+
+    .table {
+      min-width: 1000px;
+    }

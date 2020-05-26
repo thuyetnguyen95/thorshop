@@ -36,9 +36,15 @@ module.exports = {
     return res.redirect('/thor/sell')
   },
 
-  // storeCategory: (req, res) => {
+  indexSold: (req, res) => {
+    let totalRecord = Sell.totalRecord()
+    let totalPage = totalRecord / 2
+    let page = parseInt(req.query.p || 1)
+    let sold = Sell.paginate(page)
+    let products = Product.all()
 
-  // },
+    res.render("thor/sell/sold", { products, sold: [...sold].reverse(), totalPage, currentPage: page });
+  },
 
   // editCategory: (req, res) => {
 
