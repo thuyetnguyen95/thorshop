@@ -147,12 +147,14 @@ module.exports = {
   },
 
   deleteProduct: (req, res) => {
-    let id = req.params.id || ''
-
-    //TODO: implement fail case
-    Product.remove(id)
-
     return res.redirect('/thor/product')
+    
+    // let id = req.params.id || ''
+
+    // //TODO: implement fail case
+    // Product.remove(id)
+
+    // return res.redirect('/thor/product')
   },
 
   importProduct: (req, res) => {
