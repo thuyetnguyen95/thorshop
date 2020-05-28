@@ -4,7 +4,7 @@ block content
   ol.breadcrumb.mb-4.mt-4
     li(class="breadcrumb-item active") Sản phẩm
   form.d-md-inline-block.form-inline.ml-auto.mr-0.mr-md-3.my-2.my-md-0.w-100(action="/thor/sell/sold" method="get")
-    input(type="hidden" name="p" value=currentPage)
+    input(type="hidden" name="p" value=1)
     .row.mb-4
       .col-md-3.w-100
           .input-group
@@ -41,6 +41,8 @@ block content
                 tr
                   td= index + 1
                   td
+                    - var customer = users.filter(user => user.id === parseInt(item.userId))
+                    a.text-capitalize(href="#")= customer.length ? customer[0]['name'] : ''
                   td
                     each productBought, prodIdx in item.productInfo
                       a.text-capitalize(href="#")= (products.filter(product => product.id === productBought.id)[0].name + `${item.productInfo.length !== prodIdx + 1 ? ', ': ''}`)
@@ -107,7 +109,7 @@ block style
       min-width: 200px;
     }
 
-    .thead-created-at {
+    .thead-note, .thead-created-at {
       min-width: 200px;
     }
 
