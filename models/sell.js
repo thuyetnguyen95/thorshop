@@ -13,6 +13,12 @@ const save = (sellInfo) => {
   return findById(id)
 }
 
+const remove = (id) => {
+  let removed = db.get('sell').remove({ id }).write()
+
+  return !!removed.length
+}
+
 const paginate = (page = 0) => {
   if (!page || page === 1) {
     return db.get('sell').slice(-ITEM_PER_PAGE).value()  
@@ -45,10 +51,13 @@ const findById = (id) => {
   return sold || null
 }
 
+
 module.exports = {
   save,
   all,
   paginate,
   totalRecord,
   paginateRaw,
+  findById,
+  remove,
 }

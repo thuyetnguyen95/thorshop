@@ -10,21 +10,21 @@
     {
       "id": "CSvr_j9tW",
       "name": "Bánh mì đậu đỏ",
-      "stock": 42,
-      "sold": 8,
+      "stock": 39,
+      "sold": 11,
       "price": 8000,
       "expiryAt": "2020-06-13",
       "categoryId": "YVWyflYEx",
-      "image": "image-1589206482419-868095502.JPEG",
+      "image": "image-1590776479083-890740367.jpg",
       "addedAt": "2020-05-11T14:14:42.422Z"
     },
     {
       "id": "Oqp1KRi5G",
       "name": "oishi",
-      "stock": 3,
-      "sold": 12,
+      "stock": 50,
+      "sold": 15,
       "price": 6000,
-      "expiryAt": "2020-06-13",
+      "expiryAt": "2020-06-30",
       "categoryId": "R5l-BYsuD",
       "image": "image-1589206568299-399970911.JPEG",
       "addedAt": "2020-05-11T14:16:08.303Z"
@@ -32,10 +32,10 @@
     {
       "id": "hAfENZWHq",
       "name": "Red Bull",
-      "stock": 0,
-      "sold": 10,
+      "stock": 49,
+      "sold": 11,
       "price": 12000,
-      "expiryAt": "2020-06-13",
+      "expiryAt": "2020-06-30",
       "categoryId": "1lOTv3Dt_",
       "image": "image-1589331839514-322859011.png",
       "addedAt": "2020-05-13T01:03:59.518Z"
@@ -43,13 +43,35 @@
     {
       "id": "-ZMhcqiIj",
       "name": "Kẹo gucci",
-      "stock": 991,
-      "sold": 6,
+      "stock": 970,
+      "sold": 30,
       "price": 10000,
       "expiryAt": "2020-05-31",
       "categoryId": "YVWyflYEx",
       "image": "image-1589371193111-915027729.jpg",
       "addedAt": "2020-05-13T11:59:53.116Z"
+    },
+    {
+      "id": "KwdyKjDjo",
+      "name": "Mì tôm",
+      "stock": 49,
+      "price": 6000,
+      "expiryAt": "2020-06-30",
+      "categoryId": "YVWyflYEx",
+      "image": "image-1590776339266-670331350.jpg",
+      "addedAt": "2020-05-30 01:18",
+      "sold": 1
+    },
+    {
+      "id": "XL66EVzLp",
+      "name": "Bim bim",
+      "stock": 99,
+      "price": 10000,
+      "expiryAt": "2020-06-30",
+      "categoryId": "R5l-BYsuD",
+      "image": "image-1590776376638-548757267.png",
+      "addedAt": "2020-05-30 01:19",
+      "sold": 1
     }
   ],
   "category": [
@@ -221,22 +243,6 @@
       "createdAt": "2020-05-22 10:30"
     },
     {
-      "id": "8pBOLnsup",
-      "userId": 1,
-      "totalPrice": 20000,
-      "pay": 20000,
-      "inDebt": 0,
-      "note": "333",
-      "productInfo": [
-        {
-          "id": "-ZMhcqiIj",
-          "qty": 2,
-          "price": 10000
-        }
-      ],
-      "createdAt": "2020-05-22 10:30"
-    },
-    {
       "id": "-0STm37_l",
       "userId": 1,
       "totalPrice": 6000,
@@ -309,6 +315,190 @@
         }
       ],
       "createdAt": "2020-05-29 00:32"
+    },
+    {
+      "id": "16TdQdmKt",
+      "userId": 7,
+      "totalPrice": 20000,
+      "pay": 20000,
+      "inDebt": 0,
+      "note": "",
+      "productInfo": [
+        {
+          "id": "-ZMhcqiIj",
+          "qty": 2,
+          "price": 10000
+        }
+      ],
+      "createdAt": "2020-05-30 01:15"
+    },
+    {
+      "id": "fc9ar9qHe",
+      "userId": 11,
+      "totalPrice": 20000,
+      "pay": 25000,
+      "inDebt": 0,
+      "note": "",
+      "productInfo": [
+        {
+          "id": "-ZMhcqiIj",
+          "qty": 2,
+          "price": 10000
+        }
+      ],
+      "createdAt": "2020-05-30 01:16"
+    },
+    {
+      "id": "DHlGHuQlt",
+      "userId": 9,
+      "totalPrice": 30000,
+      "pay": 29000,
+      "inDebt": 1000,
+      "note": "",
+      "productInfo": [
+        {
+          "id": "-ZMhcqiIj",
+          "qty": 3,
+          "price": 10000
+        }
+      ],
+      "createdAt": "2020-05-30 01:16"
+    },
+    {
+      "id": "5YRm-s_2r",
+      "userId": 9,
+      "totalPrice": 60000,
+      "pay": 55000,
+      "inDebt": 5000,
+      "note": "",
+      "productInfo": [
+        {
+          "id": "-ZMhcqiIj",
+          "qty": 6,
+          "price": 10000
+        }
+      ],
+      "createdAt": "2020-05-30 01:17"
+    },
+    {
+      "id": "ryJrDLxZp",
+      "userId": 16,
+      "totalPrice": 40000,
+      "pay": 40000,
+      "inDebt": 0,
+      "note": "",
+      "productInfo": [
+        {
+          "id": "-ZMhcqiIj",
+          "qty": 4,
+          "price": 10000
+        }
+      ],
+      "createdAt": "2020-05-30 01:17"
+    },
+    {
+      "id": "jZT_QqaDx",
+      "userId": 5,
+      "totalPrice": 20000,
+      "pay": 20000,
+      "inDebt": 0,
+      "note": "",
+      "productInfo": [
+        {
+          "id": "-ZMhcqiIj",
+          "qty": 2,
+          "price": 10000
+        }
+      ],
+      "createdAt": "2020-05-30 01:17"
+    },
+    {
+      "id": "ddtNbHmaZ",
+      "userId": 1,
+      "totalPrice": 34000,
+      "pay": 30000,
+      "inDebt": 4000,
+      "note": "",
+      "productInfo": [
+        {
+          "id": "CSvr_j9tW",
+          "qty": 1,
+          "price": 8000
+        },
+        {
+          "id": "-ZMhcqiIj",
+          "qty": 2,
+          "price": 10000
+        },
+        {
+          "id": "Oqp1KRi5G",
+          "qty": 1,
+          "price": 6000
+        }
+      ],
+      "createdAt": "2020-05-30 01:18"
+    },
+    {
+      "id": "e8qvj19-rJ",
+      "userId": 1,
+      "totalPrice": 34000,
+      "pay": 30000,
+      "inDebt": 4000,
+      "note": "",
+      "productInfo": [
+        {
+          "id": "CSvr_j9tW",
+          "qty": 1,
+          "price": 8000
+        },
+        {
+          "id": "-ZMhcqiIj",
+          "qty": 2,
+          "price": 10000
+        },
+        {
+          "id": "Oqp1KRi5G",
+          "qty": 1,
+          "price": 6000
+        }
+      ],
+      "createdAt": "2020-05-30 01:18"
+    },
+    {
+      "id": "lWP3wiZYR",
+      "userId": 1,
+      "totalPrice": 42000,
+      "pay": 42000,
+      "inDebt": 0,
+      "note": "",
+      "productInfo": [
+        {
+          "id": "CSvr_j9tW",
+          "qty": 1,
+          "price": 8000
+        },
+        {
+          "id": "Oqp1KRi5G",
+          "qty": 1,
+          "price": 6000
+        },
+        {
+          "id": "hAfENZWHq",
+          "qty": 1,
+          "price": 12000
+        },
+        {
+          "id": "KwdyKjDjo",
+          "qty": 1,
+          "price": 6000
+        },
+        {
+          "id": "XL66EVzLp",
+          "qty": 1,
+          "price": 10000
+        }
+      ],
+      "createdAt": "2020-05-30 01:20"
     }
   ],
   "users": [

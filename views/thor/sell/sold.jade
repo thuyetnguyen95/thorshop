@@ -3,7 +3,7 @@ extends ../layout/master
 block content
   ol.breadcrumb.mb-4.mt-4
     li(class="breadcrumb-item active") Sản phẩm
-  form.d-md-inline-block.form-inline.ml-auto.mr-0.mr-md-3.my-2.my-md-0.w-100(action="/thor/sell/sold" method="get")
+  form.d-md-inline-block.form-inline.ml-auto.mr-0.mr-md-3.my-2.my-md-0.w-100(action="/thor/sold" method="get")
     input(type="hidden" name="p" value=1)
     .row.mb-4
       .col-md-3.w-100
@@ -18,7 +18,7 @@ block content
         input.form-control.w-100(type="date" name="date" value=date)
       .my-auto
         button.btn.btn-primary.btn-sm(type='submit') Tìm kiếm
-        a.btn.btn-secondary.btn-sm.ml-2(href="/thor/sell/sold?p=#{currentPage}") Clear
+        a.btn.btn-secondary.btn-sm.ml-2(href="/thor/sold?p=#{currentPage}") Clear
 
   .row
     .col-md-12
@@ -56,7 +56,12 @@ block content
                   td= item.note
                   td.td-action
                     a(href="#" class="btn btn-info btn-sm" data-toggle='modal' data-target='#modalConfirm') Sửa
-                    button.btn.btn-danger.btn-sm.ml-1(type='button' data-toggle='modal' data-target='#modalConfirm') Xóa
+                    button.btn.btn-danger.btn-sm.ml-1(
+                      type='button'
+                      data-toggle='modal'
+                      data-target='#modalConfirmDelete'
+                      onclick="openConfirmDelete('#{item.id}')"
+                    ) Xóa
   hr
   .row
     .col-md-6.offset-md-6
@@ -74,22 +79,43 @@ block content
               a.page-link(href="?p=#{currentPage < totalPage ? currentPage + 1 : totalPage}&keyword=#{keyword}&status=#{status}&date=#{date}" aria-label='Next')
                 span(aria-hidden='true') &raquo;
                 span.sr-only Next
-  // Modal
-  #modalConfirm.modal.fade(tabindex='-1' role='dialog' aria-hidden='true')
-    .modal-dialog.modal-dialog-centered.modal-sm(role='document')
+
+  // Modal confirm delete
+  #modalConfirmDelete.modal.fade(tabindex='-1' role='dialog' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered(role='document')
       .modal-content
         .modal-header
-          h5#exampleModalLongTitle.modal-title Hmmmmmm!
+          h5#exampleModalLongTitle.modal-title 😭😭 Oh no!
           button.close(type='button' data-dismiss='modal' aria-label='Close')
             span(aria-hidden='true') &times;
         .modal-body
-          //- | Thao tác này không thể hoàn tác.
-          //- | Bạn có chắc chắn muốn xoá?
-          p Feature is under construction.
-          p Please comback later!
+          p.text-danger Thao tác này không thể hoàn tác.
+          p.text-danger Bạn có chắc chắn muốn xoá?
+          p
+            small.font-weight-lighter (Sản phẩm sẽ được hoàn lại vào kho khi bạn xóa)
         .modal-footer
-          button.btn.btn-secondary.btn-sm(type='button' data-dismiss='modal') Close
-          //- button.btn.btn-danger.btn-sm(type='button') Xoá
+          button.btn.btn-secondary.btn-sm(type='button' data-dismiss='modal') Đóng
+          button.btn.btn-danger.btn-sm(type='button' onclick="deleteOrder()") Xoá
+
+  //- // Modal
+  //- #modalConfirm.modal.fade(tabindex='-1' role='dialog' aria-hidden='true')
+  //-   .modal-dialog.modal-dialog-centered.modal-sm(role='document')
+  //-     .modal-content
+  //-       .modal-header
+  //-         h5#exampleModalLongTitle.modal-title Hmmmmmm!
+  //-         button.close(type='button' data-dismiss='modal' aria-label='Close')
+  //-           span(aria-hidden='true') &times;
+  //-       .modal-body
+  //-         //- | Thao tác này không thể hoàn tác.
+  //-         //- | Bạn có chắc chắn muốn xoá?
+  //-         p Feature is under construction.
+  //-         p Please comback later!
+  //-       .modal-footer
+  //-         button.btn.btn-secondary.btn-sm(type='button' data-dismiss='modal') Close
+  //-         //- button.btn.btn-danger.btn-sm(type='button') Xoá
+
+block script
+  script(src="/js/sold.js")
 
 block style
   style.

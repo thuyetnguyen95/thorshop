@@ -110,9 +110,9 @@ module.exports = {
     let users = User.all()
 
     res.render("thor/sell/sold", {
+      sold: [...sold].reverse(),
       products,
       users,
-      sold: [...sold].reverse(),
       totalPage,
       currentPage: page,
       keyword,
@@ -121,14 +121,20 @@ module.exports = {
     });
   },
 
-  // editCategory: (req, res) => {
+  deleteOrder: (req, res) => {
+    let id = req.params.id || ''
+    let orderDetail = Sell.findById(id)
 
-  // },
+    if (orderDetail) {
+      orderDetail.productInfo.map(item => {
+        let product = Product.findById(item.id)
+        if (product) {
+          Product.update(product.id, { stock: product.stock + item.qty })
+        }
+      })
 
-  // updateCategory: (req, res) => {
+      setTimeout(() => { Sell.remove(id) }, 100);
+    }
 
-  // },
-  // deleteCategory: (req, res) => {
-
-  // }
+    return res.redirect('/thor/sold')  },
 };
