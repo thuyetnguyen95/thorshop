@@ -56,6 +56,18 @@ block content
       .bill-container
         form(action="/thor/sell/store" method="post")
           .form-group.row
+            label.col-sm-4.col-form-label(for='f_filter') Lọc khách hàng
+            .col-sm-8
+              input#f_filter_user.form-control(type='text' oninput="onFilterUser()")
+          .form-group.row
+            label.col-sm-4.col-form-label(for='f_user') Tên khách hàng
+            .col-sm-8
+              select#f_user.form-control(name="userId")
+                option(value='') -- Chọn tên khách hàng --
+                each user in users
+                  option(value=user.id)= user.name
+                
+          .form-group.row
             label.col-sm-4.col-form-label(for='f_qty') Tổng số mặt hàng 
             .col-sm-8
               input#f_qty.form-control(type='number' readonly name="qty")

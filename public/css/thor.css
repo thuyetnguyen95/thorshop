@@ -17,3 +17,11 @@
 .form-control:focus {
   box-shadow: unset!important;
 }
+
+.is-hidden {
+  display: none;
+}
+
+.is-block {
+  display: block;
+}

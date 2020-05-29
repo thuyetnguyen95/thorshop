@@ -235,6 +235,32 @@ function onChangePay() {
   allowSubmitPay()
 }
 
+function onFilterUser() {
+  $('#f_user')[0][0].selected = true
+
+  let keyword = $('#f_filter_user').val().trim() || ''
+  let userEls = $('#f_user')
+  userEls = userEls[0]
+
+  for (let i = 0; i < userEls.length; i++) {
+    let user = userEls[i].innerText
+
+    if (user && keyword) {
+      let isContain = stringToSlug(user).includes(stringToSlug(keyword))
+
+      if (isContain) {
+        $(userEls[i]).addClass('is-block')
+        $(userEls[i]).removeClass('is-hidden')
+      } else {
+        $(userEls[i]).addClass('is-hidden')
+        $(userEls[i]).removeClass('is-block')
+      }
+    } else {
+      $(userEls[i]).addClass('is-block')
+      $(userEls[i]).removeClass('is-hidden')
+    }
+  }
+}
 
 /**
  * Handle filter products

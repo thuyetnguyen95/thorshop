@@ -25,6 +25,10 @@ const paginate = (page = 0) => {
   return sold.length ? sold : []
 }
 
+const paginateRaw = () => {
+  return db.get('sell').value()  
+}
+
 const totalRecord = () => {
   return db.get('sell').size().value() || 0
 }
@@ -46,4 +50,5 @@ module.exports = {
   all,
   paginate,
   totalRecord,
+  paginateRaw,
 }
