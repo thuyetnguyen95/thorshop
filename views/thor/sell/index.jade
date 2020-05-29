@@ -63,7 +63,7 @@ block content
             label.col-sm-4.col-form-label(for='f_user') Tên khách hàng
             .col-sm-8
               select#f_user.form-control(name="userId")
-                option(value='') -- Chọn tên khách hàng --
+                option(value='') -- Chọn khách hàng --
                 each user in users
                   option(value=user.id)= user.name
                 

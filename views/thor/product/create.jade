@@ -12,7 +12,7 @@ block content
     .col-md-6
       form(action="/thor/product/store" method="post" enctype="multipart/form-data")
         .form-group
-          label(for='lbCategoryId') Loại sản phảm
+          label(for='lbCategoryId') Loại sản phẩm
           select#lbCategoryId.form-control(name="categoryId" required)
             option(value="") -- Chọn 1 loại --
             each category in categories
