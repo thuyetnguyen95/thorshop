@@ -43,8 +43,32 @@ block content
                     span(class="chip #{product.status.class}")= product.status.text
                   td
                     a(href="/thor/product/edit/#{product.id}" class="btn btn-info btn-sm") Sửa
-                    a(href="/thor/product/delete/#{product.id}" class="btn btn-danger btn-sm ml-1") Xóa
+                    //- a(href="/thor/product/delete/#{product.id}" class="btn btn-danger btn-sm ml-1") Xóa
+                    button.btn.btn-danger.btn-sm.ml-1(
+                      type='button'
+                      data-toggle='modal'
+                      data-target='#modalConfirmDeleteProduct'
+                      onclick="openConfirmDeleteProduct('#{product.id}')"
+                    ) Xóa
 
+  // Modal confirm delete
+  #modalConfirmDeleteProduct.modal.fade(tabindex='-1' role='dialog' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered(role='document')
+      .modal-content
+        .modal-header
+          h5#exampleModalLongTitle.modal-title 😭😭 Oh no!
+          button.close(type='button' data-dismiss='modal' aria-label='Close')
+            span(aria-hidden='true') &times;
+        .modal-body
+          p.text-danger Thao tác này không thể hoàn tác.
+          p.text-danger Bạn có chắc chắn muốn xoá sản phẩm này?
+          p
+            small.font-weight-lighter (Sản phẩm sẽ không được hiển thị trong đơn hàng đã mua)
+        .modal-footer
+          button.btn.btn-secondary.btn-sm(type='button' data-dismiss='modal') Đóng
+          button.btn.btn-danger.btn-sm(type='button' onclick="deleteProduct()") Xoá
+block script
+  script(src="/js/product.js")
 
 block style
   style.

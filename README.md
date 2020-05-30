@@ -1,2 +1,2 @@
 # thorshop
-Simple shopping cart nodejs, express, lowdb & bootstrap
+Simple shop management nodejs, express, lowdb & bootstrap

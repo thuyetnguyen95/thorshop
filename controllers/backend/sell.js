@@ -131,10 +131,27 @@ module.exports = {
         if (product) {
           Product.update(product.id, { stock: product.stock + item.qty })
         }
-      })
+    })
 
       setTimeout(() => { Sell.remove(id) }, 100);
     }
 
-    return res.redirect('/thor/sold')  },
+    return res.redirect('/thor/sold')
+  },
+
+  editOrder: (req, res) => {
+    let id = req.params.id || ''
+    let order = Sell.findById(id)
+
+    if (!order) return res.redirect('/thor/sold')
+
+    let products = Product.all()
+    let users = User.all()
+
+    return res.render('thor/sell/edit', {
+      order,
+      products,
+      users,
+    })
+  }
 };
