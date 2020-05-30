@@ -60,8 +60,6 @@ block content
                           title="Loại bỏ"
                           type="button"
                           class="btn btn-sm btn-danger"
-                          data-toggle='modal'
-                          data-target='#modalConfirmDelete'
                           onclick="remove('#{productYasuo.id}', #{productYasuo.price}, #{product.qty})"
                         )
                           i.fa.fa-trash
@@ -121,6 +119,21 @@ block content
         .modal-footer
           button.btn.btn-secondary.btn-sm(type='button' data-dismiss='modal') Đóng
           button.btn.btn-danger.btn-sm(type='button' onclick="deleteProduct()") Xoá
+
+  #modalWarningRemove.modal.fade(tabindex='-1' role='dialog' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered(role='document')
+      .modal-content
+        .modal-header
+          h5#exampleModalLongTitle.modal-title 😭😭 Oh no!
+          button.close(type='button' data-dismiss='modal' aria-label='Close')
+            span(aria-hidden='true') &times;
+        .modal-body
+          p Bạn không thể xóa hết sản phẩm
+          p Xóa hết rồi thì còn gì đâu mà thanh toán 😥
+          p
+            small.font-weight-lighter (Vui lòng thực hiện xóa bên ngoài danh sách sản phẩm đã bán 😁😁)
+        .modal-footer
+          button.btn.btn-secondary.btn-sm(type='button' data-dismiss='modal') Đóng
 
 block script
   script(src="/js/edit-order.js")
