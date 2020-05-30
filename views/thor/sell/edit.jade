@@ -1,0 +1,137 @@
+extends ../layout/master
+
+block content
+
+  nav(aria-label='breadcrumb' class="mb-4 mt-4")
+    ol.breadcrumb
+      li.breadcrumb-item
+        a(href='/thor/sold') Đã bán
+      li.breadcrumb-item Chỉnh sửa
+  hr
+  
+  .row
+    .col-md-8.col-sm-12
+      form(action="/thor/sold/edit/#{order.id}" method="post")
+        h6 Thông tin người mua
+        .row
+          .form-group.col-md-3
+            label(for='f_filter_name') Lọc theo tên
+            input#f_filter_user.form-control(type='text' oninput="onFilterUser()")
+          .form-group.col-md-4
+            label(for='f_user') Tên người mua
+            .d-flex
+              select#f_user.form-control(name="userId" required)
+                option(value='') -- Chọn tên khách hàng --
+                each user in users
+                  option(value=user.id selected=order.userId === user.id)= user.name
+              button.btn.btn-secondary.ml-2(type="button" onclick="resetCustomer('#{order.userId}')") Reset
+
+        h6.mt-4 Thông tin sản phẩm
+        .row
+          .col-md-8.col-sm-12
+            table.table.table-product
+              thead
+                tr
+                  th(scope='col') #
+                  th(scope='col') Tên sản phẩm
+                  th(scope='col') Số lượng
+                  th(scope='col') Giá
+                  th(scope='col') Tác vụ
+              tbody#orderProduct
+                each product, index in order.productInfo
+                  - var productAv = products.filter(item => item.id === product.id)
+                  if productAv.length
+                    - var productYasuo = productAv[0]
+                    tr(id=`product_${productYasuo.id}`)
+                      td.productId(style="display:none;")= productYasuo.id
+                      th(scope='row')= index + 1
+                      td
+                        a.text-capitalize(href="#")=  productYasuo.name
+                      td.productQty(style="width: 150px;" id="f_product_qty_#{productYasuo.id}")= product.qty
+                      td(style="width: 150px;" id="f_product_price_#{productYasuo.id}")
+                        span= product.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})
+                        span.productPrice(style="display:none")= product.price
+                      td(style="width: 150px;")
+                        button(title="Thêm" type="button" class="btn btn-sm btn-info" onclick="increment('#{productYasuo.id}', #{productYasuo.price})")
+                          i.fa.fa-plus
+                        button(title="Giảm" type="button" class="btn btn-sm btn-warning" onclick="decrement('#{productYasuo.id}', #{productYasuo.price})")
+                          i.fa.fa-minus
+                        button(
+                          title="Loại bỏ"
+                          type="button"
+                          class="btn btn-sm btn-danger"
+                          data-toggle='modal'
+                          data-target='#modalConfirmDelete'
+                          onclick="remove('#{productYasuo.id}', #{productYasuo.price}, #{product.qty})"
+                        )
+                          i.fa.fa-trash
+        h6.mt-4 Thông tin thanh toán
+        .row
+          .form-group.col-md-4
+            label(for='f_total_price') Tổng tiền
+            .input-group.mb-3
+              .input-group-prepend
+                span.input-group-text $
+              input#f_total_price.form-control(type='number' value=order.totalPrice name="total_price" readonly)
+              .input-group-append
+                span.input-group-text đ
+        .row
+          .form-group.col-md-4
+            label(for='f_pay') Thanh toán
+            input#f_pay.form-control(type='number' name="pay" value=order.pay required oninput="onChangePay()")
+        .row
+          .form-group.col-md-4
+            label(for='f_in_debt') Nợ
+            .input-group.mb-3
+              .input-group-prepend
+                span.input-group-text $
+              input#f_in_debt.form-control(type='number' value=order.inDebt name="in_debt" readonly)
+              .input-group-append
+                span.input-group-text đ
+        .row
+          .form-group.col-md-4
+            label(for='f_refund') Trả lại
+            .input-group.mb-3
+              .input-group-prepend
+                span.input-group-text $
+              - var refund = order.totalPrice - order.pay < 0 ? Math.abs(order.totalPrice - order.pay) : ''
+              input#f_refund.form-control(type='number' value=refund readonly)
+              .input-group-append
+                span.input-group-text đ
+        .row
+          .form-group.col-md-6
+            label(for='f_note') Ghi chú
+            textarea#f_note.form-control(autocomplete="off" name="note" value=order.note)= order.note
+        
+        input#productInfo(type="hidden" name="productInfo")
+
+        a.btn.btn-secondary(href="/thor/sold") Trở lại 
+        button.btn.btn-success.ml-2(type='submit') Thanh toán
+
+  #modalConfirmDelete.modal.fade(tabindex='-1' role='dialog' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered(role='document')
+      .modal-content
+        .modal-header
+          h5#exampleModalLongTitle.modal-title 😭😭 Oh no!
+          button.close(type='button' data-dismiss='modal' aria-label='Close')
+            span(aria-hidden='true') &times;
+        .modal-body
+          p.text-danger Thao tác này không thể hoàn tác.
+          p.text-danger Bạn có chắc chắn muốn xoá?
+        .modal-footer
+          button.btn.btn-secondary.btn-sm(type='button' data-dismiss='modal') Đóng
+          button.btn.btn-danger.btn-sm(type='button' onclick="deleteProduct()") Xoá
+
+block script
+  script(src="/js/edit-order.js")
+
+block style
+  style.
+    .table-product button {
+      margin-right: 6px;
+      color: #fff;
+    }
+
+    .table-product button:hover {
+      color: #fff;
+    }

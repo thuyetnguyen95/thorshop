@@ -13,6 +13,12 @@ const save = (sellInfo) => {
   return findById(id)
 }
 
+const update = (id, product) => {
+  db.get('sell').find({id}).assign({...product}).write()
+
+  return findById(id)
+}
+
 const remove = (id) => {
   let removed = db.get('sell').remove({ id }).write()
 
@@ -60,4 +66,5 @@ module.exports = {
   paginateRaw,
   findById,
   remove,
+  update,
 }

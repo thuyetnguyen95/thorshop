@@ -44,10 +44,6 @@ block content
                     span.text-primary #{product.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}
                   p.card-text Còn: 
                     span(class="product-stock_#{product.id}") #{product.stock}
-                //- if product.stock
-                //-   button.btn.btn-sm.btn-success.mt-3.float-right(onclick="pickProduct('#{JSON.stringify(product)}')") chọn
-                //- else
-                //-   button.btn.btn-sm.btn-danger.mt-3.float-right hết hàng
                 button.btn.btn-sm.btn-success.mt-3.float-right.btn-pick(class=product.stock ? "is-btn-block" : "is-btn-hidden" onclick="pickProduct('#{JSON.stringify(product)}')") chọn
                 button.btn.btn-sm.btn-danger.mt-3.float-right.btn-out(class=product.stock ? "is-btn-hidden" : "is-btn-block") hết hàng
               
@@ -104,7 +100,7 @@ block content
                   span.input-group-text đ
 
           .form-group.row
-            label.col-sm-4.col-form-label(for='f_in_debt') Trả lại
+            label.col-sm-4.col-form-label(for='f_refund') Trả lại
             .col-sm-8
               .input-group.mb-3
                 .input-group-prepend
@@ -114,7 +110,7 @@ block content
                   span.input-group-text đ
 
           .form-group.row
-            label.col-sm-4.col-form-label(for='f_note') Note
+            label.col-sm-4.col-form-label(for='f_note') Ghi chú
             .col-sm-8
               textarea#f_note.form-control(autocomplete="off" name="note")
 
