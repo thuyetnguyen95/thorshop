@@ -153,5 +153,54 @@ module.exports = {
       products,
       users,
     })
-  }
+  },
+
+  updateOrder: (req, res) => {
+    let id = req.params.id || ''
+    if (!id) return res.redirect('/thor/sold')
+
+    let order = Sell.findById(id)
+    if (!order) return res.redirect('/thor/sold')
+    let oldProducts = order.productInfo
+
+    let userId = parseInt(req.body.userId || 0)
+    let totalPrice = parseInt(req.body.total_price || 0)
+    let pay = parseInt(req.body.pay || 0)
+    let inDebt = parseInt(req.body.in_debt || 0)
+    let note = req.body.note
+    let productInfo = JSON.parse(req.body.productInfo)
+
+    try {
+      oldProducts.forEach(oldProduct => {
+        let newProduct = productInfo.filter(item => item.id === oldProduct.id)
+        let product = Product.findById(oldProduct.id)
+
+        if (newProduct.length) {
+          newProduct = newProduct[0]
+          let stock = product.stock + (parseInt(oldProduct.qty) - parseInt(newProduct.qty))
+
+          Product.update(product.id, {stock})
+        } else {
+          let stock = parseInt(product.stock) + parseInt(oldProduct.qty)
+
+          Product.update(product.id, {stock})
+        }
+      });
+
+      let data = {}
+
+      data.userId = userId || order.userId
+      data.totalPrice = totalPrice || order.totalPrice
+      data.pay = pay || 0
+      data.inDebt = inDebt || 0
+      data.note = note
+      data.productInfo = productInfo || order.productInfo
+
+      Sell.update(id, data)
+    } catch (error) {
+      console.log(error)
+    }
+
+    res.redirect('/thor/sold')
+  },
 };

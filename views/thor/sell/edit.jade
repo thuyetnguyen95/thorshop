@@ -11,7 +11,7 @@ block content
   
   .row
     .col-md-8.col-sm-12
-      form
+      form(action="/thor/sold/edit/#{order.id}" method="post")
         h6 Thông tin người mua
         .row
           .form-group.col-md-3
@@ -19,10 +19,12 @@ block content
             input#f_filter_user.form-control(type='text' oninput="onFilterUser()")
           .form-group.col-md-4
             label(for='f_user') Tên người mua
-            select#f_user.form-control(name="userId")
-              option(value='') -- Chọn tên khách hàng --
-              each user in users
-                option(value=user.id)= user.name
+            .d-flex
+              select#f_user.form-control(name="userId" required)
+                option(value='') -- Chọn tên khách hàng --
+                each user in users
+                  option(value=user.id selected=order.userId === user.id)= user.name
+              button.btn.btn-secondary.ml-2(type="button" onclick="resetCustomer('#{order.userId}')") Reset
 
         h6.mt-4 Thông tin sản phẩm
         .row
@@ -33,17 +35,22 @@ block content
                   th(scope='col') #
                   th(scope='col') Tên sản phẩm
                   th(scope='col') Số lượng
+                  th(scope='col') Giá
                   th(scope='col') Tác vụ
-              tbody
+              tbody#orderProduct
                 each product, index in order.productInfo
                   - var productAv = products.filter(item => item.id === product.id)
                   if productAv.length
                     - var productYasuo = productAv[0]
                     tr(id=`product_${productYasuo.id}`)
+                      td.productId(style="display:none;")= productYasuo.id
                       th(scope='row')= index + 1
                       td
                         a.text-capitalize(href="#")=  productYasuo.name
-                      td(style="width: 150px;" id="f_product_qty_#{productYasuo.id}")= product.qty
+                      td.productQty(style="width: 150px;" id="f_product_qty_#{productYasuo.id}")= product.qty
+                      td(style="width: 150px;" id="f_product_price_#{productYasuo.id}")
+                        span= product.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})
+                        span.productPrice(style="display:none")= product.price
                       td(style="width: 150px;")
                         button(title="Thêm" type="button" class="btn btn-sm btn-info" onclick="increment('#{productYasuo.id}', #{productYasuo.price})")
                           i.fa.fa-plus
@@ -88,13 +95,13 @@ block content
               .input-group-prepend
                 span.input-group-text $
               - var refund = order.totalPrice - order.pay < 0 ? Math.abs(order.totalPrice - order.pay) : ''
-              input#f_refund.form-control(type='number' value=refund name="refund" readonly)
+              input#f_refund.form-control(type='number' value=refund readonly)
               .input-group-append
                 span.input-group-text đ
         .row
           .form-group.col-md-6
             label(for='f_note') Ghi chú
-            textarea#f_note.form-control(autocomplete="off" name="note")
+            textarea#f_note.form-control(autocomplete="off" name="note" value=order.note)= order.note
         
         input#productInfo(type="hidden" name="productInfo")
 

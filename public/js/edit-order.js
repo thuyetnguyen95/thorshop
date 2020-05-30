@@ -3,6 +3,8 @@ let productRemoveId = null
 let productRemovePrice = null
 let productRemoveQty = null
 
+setCartInfo()
+
 $('#modalConfirmDelete').on('hidden.bs.modal', function (e) {
   productRemoveId = null
   productRemovePrice = null
@@ -19,6 +21,7 @@ function increment(id, price) {
   $('#f_total_price').val(totalPrice)
 
   onChangePay()
+  setCartInfo()
 }
 
 function decrement(id, price) {
@@ -34,6 +37,7 @@ function decrement(id, price) {
   }
 
   onChangePay()
+  setCartInfo()
 }
 
 function remove(id, price, qty) {
@@ -53,6 +57,7 @@ function deleteProduct() {
   $('#modalConfirmDelete').modal('hide')
 
   onChangePay()
+  setCartInfo()
 }
 
 /**
@@ -75,18 +80,24 @@ function onChangePay() {
  * Set cart info to submit
  */
 function setCartInfo() {
-  let userCartArr = Object.values(userCart)
+  let products = $('#orderProduct').children()
   
   let productInfo = []
-  for (let i = 0; i < userCartArr.length; i++) {
+  for (let i = 0; i < products.length; i++) {
     productInfo.push({
-      id: userCartArr[i].id,
-      qty: userCartArr[i].qty,
-      price: userCartArr[i].price
+      id: $(products[i]).find('.productId').text(),
+      qty: parseInt($(products[i]).find('.productQty').text()),
+      price: parseInt($(products[i]).find('.productPrice').text())
     })
   }
 
   $('#productInfo').val(JSON.stringify(productInfo))
+}
+
+function resetCustomer(userId) {
+  $('#f_filter_user').val('')
+  onFilterUser()
+  $('#f_user').val(userId)
 }
 
 /**
