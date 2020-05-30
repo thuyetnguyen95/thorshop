@@ -44,6 +44,14 @@ function remove(id, price, qty) {
   productRemoveId = id
   productRemovePrice = parseInt(price)
   productRemoveQty = parseInt(qty)
+
+  let products = $('#orderProduct').children()
+
+  if (products.length > 1) {
+    $('#modalConfirmDelete').modal('show')
+  } else {
+    $('#modalWarningRemove').modal('show')
+  }
 }
 
 function deleteProduct() {
