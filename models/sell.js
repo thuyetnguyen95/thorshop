@@ -25,6 +25,14 @@ const remove = (id) => {
   return !!removed.length
 }
 
+const getTotalInDebt = () => {
+  let inDebtOrders = db.get('sell')
+    .filter(o => o.inDebt > 0)
+    .value()
+  
+  return inDebtOrders.length || 0
+}
+
 const paginate = (page = 0) => {
   if (!page || page === 1) {
     return db.get('sell').slice(-ITEM_PER_PAGE).value()  
@@ -67,4 +75,5 @@ module.exports = {
   findById,
   remove,
   update,
+  getTotalInDebt,
 }

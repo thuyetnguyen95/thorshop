@@ -2,14 +2,10 @@ const authController = require('./backend/auth')
 const categoryController = require('./backend/category')
 const productController = require('./backend/product')
 const sellController = require('./backend/sell')
-
-// Home routes
-const index = (req, res) => {
-  res.render('thor/index')
-}
+const homeController = require('./backend/home')
 
 module.exports = {
-  index,
+  ...homeController,
   ...authController,
   ...categoryController,
   ...productController,

@@ -4,61 +4,65 @@ block content
     ol.breadcrumb.mb-4.mt-4
       li.breadcrumb-item.active Dashboard
 
-    .mt-5 &nbsp;
-    .mt-5 &nbsp;
-    h1.text-center.text-danger.mt-4 Feature is under construction
-    h1.text-center.text-danger.mt-4.mb-5 Please come back later!
-    .mt-5 &nbsp;
-    .mt-5 &nbsp;
+    //- .mt-5 &nbsp;
+    //- .mt-5 &nbsp;
+    //- h1.text-center.text-danger.mt-4 Feature is under construction
+    //- h1.text-center.text-danger.mt-4.mb-5 Please come back later!
+    //- .mt-5 &nbsp;
+    //- .mt-5 &nbsp;
     
-    //- .row
-    //-   .col-xl-3.col-md-6
-    //-     .card.bg-primary.text-white.mb-4
-    //-       .card-body Primary Card
-    //-       .card-footer.d-flex.align-items-center.justify-content-between
-    //-         a.small.text-white.stretched-link(href='#') View Details
-    //-         .small.text-white
-    //-           i.fa.fa-angle-right
-    //-   .col-xl-3.col-md-6
-    //-     .card.bg-warning.text-white.mb-4
-    //-       .card-body Warning Card
-    //-       .card-footer.d-flex.align-items-center.justify-content-between
-    //-         a.small.text-white.stretched-link(href='#') View Details
-    //-         .small.text-white
-    //-           i.fa.fa-angle-right
-    //-   .col-xl-3.col-md-6
-    //-     .card.bg-success.text-white.mb-4
-    //-       .card-body Success Card
-    //-       .card-footer.d-flex.align-items-center.justify-content-between
-    //-         a.small.text-white.stretched-link(href='#') View Details
-    //-         .small.text-white
-    //-           i.fa.fa-angle-right
-    //-   .col-xl-3.col-md-6
-    //-     .card.bg-danger.text-white.mb-4
-    //-       .card-body Danger Card
-    //-       .card-footer.d-flex.align-items-center.justify-content-between
-    //-         a.small.text-white.stretched-link(href='#') View Details
-    //-         .small.text-white
-    //-           i.fa.fa-angle-right
-    //- .row
-    //-   .col-xl-6
-    //-     .card.mb-4
-    //-       .card-header
-    //-         i.fa.fa-chart-area.mr-1
-    //-         | Area Chart Example
-    //-       .card-body
-    //-         canvas#myAreaChart(width='100%', height='40')
-    //-   .col-xl-6
-    //-     .card.mb-4
-    //-       .card-header
-    //-         i.fa.fa-chart-bar.mr-1
-    //-         | Bar Chart Example
-    //-       .card-body
-    //-         canvas#myBarChart(width='100%', height='40')
-    //- .card.mb-4
-    //-   .card-header
-    //-     i.fa.fa-table.mr-1
-    //-     | DataTable Example
-    //-   .card-body
-    //-     .table-responsive
+    .row
+      .col-xl-3.col-md-6
+        .card.bg-primary.text-white.mb-4
+          .card-body Doanh thu hôm nay
+          .card-footer.d-flex.align-items-center.justify-content-between
+            a.small.text-white.stretched-link(href='#') Xem chi tiết
+            .small.text-white
+              i.fa.fa-angle-right
+      .col-xl-3.col-md-6
+        .card.bg-success.text-white.mb-4
+          .card-body Doanh thu hôm qua
+          .card-footer.d-flex.align-items-center.justify-content-between
+            a.small.text-white.stretched-link(href='#') Xem chi tiết
+            .small.text-white
+              i.fa.fa-angle-right
+      .col-xl-3.col-md-6
+        .card.bg-warning.text-white.mb-4
+          .card-body
+            span.float-left Số người nợ 
+            span.float-right #{totalInDebt}
+          .card-footer.d-flex.align-items-center.justify-content-between
+            a.small.text-white.stretched-link(href='/thor/sold?status=1') Xem chi tiết
+            .small.text-white
+              i.fa.fa-angle-right
+      .col-xl-3.col-md-6
+        .card.bg-danger.text-white.mb-4
+          .card-body
+            span.float-left Các mặt hàng sắp hết
+            span.float-right 1
+          .card-footer.d-flex.align-items-center.justify-content-between
+            a.small.text-white.stretched-link(href='#') Xem chi tiết
+            .small.text-white
+              i.fa.fa-angle-right
+    .row
+      .col-xl-6
+        .card.mb-4
+          .card-header
+            i.fa.fa-chart-area.mr-1
+            | Area Chart Example
+          .card-body
+            canvas#myAreaChart(width='100%', height='40')
+      .col-xl-6
+        .card.mb-4
+          .card-header
+            i.fa.fa-chart-bar.mr-1
+            | Bar Chart Example
+          .card-body
+            canvas#myBarChart(width='100%', height='40')
+    .card.mb-4
+      .card-header
+        i.fa.fa-table.mr-1
+        | DataTable Example
+      .card-body
+        .table-responsive
   
