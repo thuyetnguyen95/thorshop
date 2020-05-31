@@ -13,35 +13,38 @@ block content
     
     .row
       .col-xl-3.col-md-6
-        .card.bg-primary.text-white.mb-4
+        .card.bg-.bg-info.text-white.mb-4
           .card-body Doanh thu hôm nay
           .card-footer.d-flex.align-items-center.justify-content-between
             a.small.text-white.stretched-link(href='#') Xem chi tiết
             .small.text-white
               i.fa.fa-angle-right
       .col-xl-3.col-md-6
-        .card.bg-success.text-white.mb-4
-          .card-body Doanh thu hôm qua
+        .card.text-white.mb-4(class="#{totalInDebt ? 'bg-secondary': 'bg-light'}")
+          .card-body
+            span.float-left Số người nợ
+            span.float-right #{totalInDebt} người
           .card-footer.d-flex.align-items-center.justify-content-between
             a.small.text-white.stretched-link(href='#') Xem chi tiết
             .small.text-white
               i.fa.fa-angle-right
       .col-xl-3.col-md-6
-        .card.bg-warning.text-white.mb-4
+        .card.text-white.mb-4(class="#{totalAlmostOver ? 'bg-warning': 'bg-light'}")
           .card-body
-            span.float-left Số người nợ 
-            span.float-right #{totalInDebt}
+            span.float-left Sản phẩm sắp hết 
+            span.float-right #{totalAlmostOver} sản phẩm
           .card-footer.d-flex.align-items-center.justify-content-between
-            a.small.text-white.stretched-link(href='/thor/sold?status=1') Xem chi tiết
+            a.small.text-white.stretched-link(href='/thor/product?status=2') Xem chi tiết
             .small.text-white
               i.fa.fa-angle-right
+
       .col-xl-3.col-md-6
-        .card.bg-danger.text-white.mb-4
+        .card.text-white.mb-4(class="#{totalProductOOS ? 'bg-danger': 'bg-light'}")
           .card-body
-            span.float-left Các mặt hàng sắp hết
-            span.float-right 1
+            span.float-left Sản phẩm đã hết
+            span.float-right #{totalProductOOS} sản phẩm
           .card-footer.d-flex.align-items-center.justify-content-between
-            a.small.text-white.stretched-link(href='#') Xem chi tiết
+            a.small.text-white.stretched-link(href='/thor/product?status=1') Xem chi tiết
             .small.text-white
               i.fa.fa-angle-right
     .row

@@ -1,14 +1,16 @@
 const Product = require('../../models/product')
 const Category = require('../../models/category')
 const uploadModule = require('../../utils/upload')
+const { AMOUNT_OF_WARNING } = require('../../utils/constant')
+const { stringToSlug } = require('../../utils/string')
 
 const getProductStatus = (product) => {
   let status = {}
 
-  if (product.stock > 5) {
+  if (product.stock > AMOUNT_OF_WARNING) {
     status.text = 'Đang còn'
     status.class = 'chip-success'
-  } else if (product.stock <= 5 && product.stock > 0) {
+  } else if (product.stock <= AMOUNT_OF_WARNING && product.stock > 0) {
     status.text = 'Sắp hết'
     status.class = 'chip-warning'
   } else {
@@ -46,8 +48,15 @@ const getAllProduct = () => {
 module.exports = {
   indexProduct: (req, res) => {
     let keyword = req.query.keyword || ''
+    let status = parseInt(req.query.status) || 0
     let products = getAllProduct()
-    products = products.filter(product => product.name.toLowerCase().includes(keyword))
+    products = products.filter(product => stringToSlug(product.name).includes(stringToSlug(keyword)))
+
+    if(status === 1) {
+      products = products.filter(product => product.stock === 0)
+    } else if(status === 2){
+      products = products.filter(product => product.stock <= AMOUNT_OF_WARNING && product.stock > 0)
+    }
 
     res.render('thor/product/index', {
       products,

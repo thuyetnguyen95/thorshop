@@ -1,6 +1,7 @@
 const shortid  = require('shortid')
 const db = require('../database/db')
 const DateHelper = require('../utils/date')
+const { AMOUNT_OF_WARNING } = require('../utils/constant')
 
 const save = (product) => {
   const id = shortid.generate()
@@ -54,6 +55,22 @@ const sold = (id, qty) => {
   return update(id, product)
 }
 
+const totalProductOOS = () => { //out of stock
+  let countOOS = db.get('products')
+  .filter(o => o.stock === 0)
+  .value()
+
+  return countOOS.length || 0
+}
+
+const totalProductAlmostOver = () => {
+  let count = db.get('products')
+  .filter(o => o.stock <= AMOUNT_OF_WARNING && o.stock > 0)
+  .value()
+
+  return count.length || 0
+}
+
 module.exports = {
   save,
   all,
@@ -62,4 +79,6 @@ module.exports = {
   findById,
   findByCategoryId,
   sold,
+  totalProductOOS,
+  totalProductAlmostOver,
 }
