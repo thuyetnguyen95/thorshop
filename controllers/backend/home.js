@@ -8,6 +8,17 @@ module.exports = {
     let totalProductOOS = Product.totalProductOOS()
     let totalAlmostOver = Product.totalProductAlmostOver()
 
-    res.render('thor/index', { totalInDebt, totalProductOOS, totalAlmostOver, totalRevenue })
+    /**
+     * TODO: change to real data
+     */
+    let revenueData = JSON.stringify([50000, 33000, 115000, 78000, 35000, 55000])
+
+    res.render('thor/index', {
+      totalInDebt,
+      totalProductOOS,
+      totalAlmostOver,
+      totalRevenue,
+      revenueData
+    })
   }
 }

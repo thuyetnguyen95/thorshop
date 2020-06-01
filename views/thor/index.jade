@@ -17,7 +17,7 @@ block content
         .card.text-white.mb-4(class="#{totalInDebt ? 'bg-secondary': 'bg-light'}")
           .card-body
             span.float-left Số người nợ
-            span.float-right #{totalInDebt} người
+            span.float-right #{totalInDebt} đơn hàng
           .card-footer.d-flex.align-items-center.justify-content-between
             a.small.text-white.stretched-link(href='/thor/sold?status=1') Xem chi tiết
             .small.text-white
@@ -45,11 +45,11 @@ block content
       .col-xl-6
         .card.mb-4
           .card-header
-            i.fa.fa-chart-area.mr-1
-            | Area Chart Example
+            i.fa.fa-bar-chart.mr-1
+            | Biểu đồ doanh thu trong tuần
           .card-body
-            | Feature is under construction!
-            canvas#myAreaChart(width='100%', height='40')
+            canvas#myChart(width='100%', height='40')
+            //- <canvas id="myChart" width="400" height="400"></canvas>
       .col-xl-6
         .card.mb-4
           .card-header
@@ -65,4 +65,73 @@ block content
       .card-body
         | Feature is under construction!
         .table-responsive
-  
+
+  block script
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js')
+    script.
+      let labels = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7']
+      let revenueData = !{revenueData}
+      let maxValue = Math.max(...revenueData)
+      let ctx = document.getElementById('myChart').getContext('2d');
+      let myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Doanh thu theo ngày trong tuần',
+            data: revenueData,
+            backgroundColor: '#0275d8',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          hover: {
+            animationDuration: 0
+          },
+          animation: {
+            duration: 1,
+            onComplete: function() {
+              var chartInstance = this.chart,
+              ctx = chartInstance.ctx;
+
+              ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'bottom';
+
+              this.data.datasets.forEach(function(dataset, i) {
+                var meta = chartInstance.controller.getDatasetMeta(i);
+                meta.data.forEach(function(bar, index) {
+                  var data = dataset.data[index];
+                  data = data.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})
+                  ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                });
+              });
+            }
+          },
+          legendCallback: function(chart) {
+            // Return the HTML string here.
+            console.log(chart)
+            return `<p style="padding: 20px;">123</p>`
+          },
+          legend: {
+            padding: 50,
+            //- align: 'end'
+          },
+          tooltips: {
+            enabled: false,
+            callbacks: {
+              label: function(tooltipItem) {
+                  return `Doanh thu: ` + Number(tooltipItem.yLabel).toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+              }
+            }
+          },
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+                suggestedMax: maxValue + 10000
+              }
+            }]
+          }
+        }
+      });
