@@ -4,14 +4,21 @@ block content
   ol.breadcrumb.mb-4.mt-4
     li(class="breadcrumb-item active") Sản phẩm
   .row.mb-4.mt-4
-    .col-md-6
-      form.d-md-inline-block.form-inline.ml-auto.mr-0.mr-md-3.my-2.my-md-0.w-50(action="/thor/product" method="get")
-        .input-group
-          input.form-control(type='text' name="keyword" placeholder='Search for...' value=keyword)
-          .input-group-append
-            button.btn.btn-primary(type='submit')
-              i.fa.fa-search
-    .col-md-6.text-right 
+    .col-md-8
+      form.d-md-inline-block.form-inline.ml-auto.mr-0.mr-md-3.my-2.my-md-0.w-100(action="/thor/product" method="get")
+        .row
+          .col-md-4.w-100
+            .input-group
+              input.form-control(type='text' name="keyword" placeholder='Tên sản phẩm...' value=keyword autocomplete="off")
+          .col-md-3
+            select.form-control.w-100(name="status")
+              option(value='') -- Trạng thái --
+              option(value=2 selected=status === 2) Sắp hết
+              option(value=1 selected=status === 1) Đã hết
+          .my-auto
+            button.btn.btn-primary.btn-sm(type='submit') Tìm kiếm
+            a.btn.btn-secondary.btn-sm.ml-2(href="/thor/product") Clear
+    .col-md-4.text-right 
       a(href="/thor/product/import" class="btn btn-info btn-sm") Nhập hàng
       a(href="/thor/product/create" class="btn btn-primary btn-sm ml-1") Thêm mới
   .row

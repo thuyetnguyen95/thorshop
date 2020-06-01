@@ -60,7 +60,8 @@ module.exports = {
 
     res.render('thor/product/index', {
       products,
-      keyword
+      keyword,
+      status,
     })
   },
 

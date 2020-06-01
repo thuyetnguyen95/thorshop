@@ -33,6 +33,23 @@ const getTotalInDebt = () => {
   return inDebtOrders.length || 0
 }
 
+const getTotalRevenue = (isToday = true, pareDate = null) => {
+  let date = isToday ? DateHelper.generateTodayDate(false) : pareDate
+  let sollToday = db.get('sell')
+    .filter(item => equalDate(item.createdAt, date))
+    .value()
+
+  if (!sollToday.length) return 0
+
+  let totalRevenue = sollToday.reduce((total, currentItem) => {
+    total += currentItem.totalPrice - currentItem.inDebt
+
+    return total
+  }, 0)
+  
+  return totalRevenue || 0
+}
+
 const paginate = (page = 0) => {
   if (!page || page === 1) {
     return db.get('sell').slice(-ITEM_PER_PAGE).value()  
@@ -65,7 +82,6 @@ const findById = (id) => {
   return sold || null
 }
 
-
 module.exports = {
   save,
   all,
@@ -76,4 +92,5 @@ module.exports = {
   remove,
   update,
   getTotalInDebt,
+  getTotalRevenue,
 }
