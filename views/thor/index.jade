@@ -6,7 +6,9 @@ block content
     .row
       .col-xl-3.col-md-6
         .card.bg-.bg-info.text-white.mb-4
-          .card-body Doanh thu hôm nay
+          .card-body 
+            span.float-left Doanh thu hôm nay
+            span.float-right #{totalRevenue.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}
           .card-footer.d-flex.align-items-center.justify-content-between
             a.small.text-white.stretched-link(href='#') Xem chi tiết
             .small.text-white

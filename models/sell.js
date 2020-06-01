@@ -36,7 +36,7 @@ const getTotalInDebt = () => {
 const getTotalRevenue = (isToday = true, pareDate = null) => {
   let date = isToday ? DateHelper.generateTodayDate(false) : pareDate
   let sollToday = db.get('sell')
-    .filter(item => equalDate(item.createdAt, date))
+    .filter(item => DateHelper.equalDate(item.createdAt, date))
     .value()
 
   if (!sollToday.length) return 0
