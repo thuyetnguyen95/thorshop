@@ -1,5 +1,7 @@
 const Sell = require('../../models/sell')
 const Product = require('../../models/product')
+const { generateTodayDate, getFristDayWeek, getFristDayLastWeek } = require('../../utils/date')
+
 
 module.exports = {
   index: (req, res) => {
@@ -7,18 +9,18 @@ module.exports = {
     let totalRevenue = Sell.getTotalRevenue()
     let totalProductOOS = Product.totalProductOOS()
     let totalAlmostOver = Product.totalProductAlmostOver()
-
-    /**
-     * TODO: change to real data
-     */
-    let revenueData = JSON.stringify([50000, 33000, 115000, 78000, 35000, 55000])
-
+    let today = generateTodayDate(false)
+    let revenueThisWeek = Sell.getRevenueWithRange(getFristDayWeek())
+    let revenueLastWeek = Sell.getRevenueWithRange(getFristDayLastWeek())
+    
     res.render('thor/index', {
       totalInDebt,
       totalProductOOS,
       totalAlmostOver,
       totalRevenue,
-      revenueData
+      revenueThisWeek: JSON.stringify(revenueThisWeek),
+      revenueLastWeek: JSON.stringify(revenueLastWeek),
+      today,
     })
   }
 }
