@@ -1,9 +1,11 @@
-//- extends layout
+include partials/header
 
-//- block content
-h1= message
-h2= error.status
-pre #{error.stack}
+.container.mt-5
+  h1= message
+  h2= error.status
+  pre #{error.stack}
 
-a(href="/") Go to Home
-a(href="/thor") Go to Admin
+  hr
+  button.btn.btn-secondary(type="button" onclick="window.history.back()") Back
+  hr
+  a.btn.btn-info(href="/") Home

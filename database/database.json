@@ -77,7 +77,7 @@
   "category": [
     {
       "id": "YVWyflYEx",
-      "name": "Đồ ăn",
+      "name": "Đồ ăn liền",
       "products": [
         {
           "id": "CSvr_j9tW",
@@ -116,7 +116,7 @@
     },
     {
       "id": "R5l-BYsuD",
-      "name": "Snack",
+      "name": "Bánh kẹo",
       "products": [
         {
           "id": "Oqp1KRi5G",
@@ -515,8 +515,8 @@
       "id": "e8qvj19-rJ",
       "userId": 1,
       "totalPrice": 44000,
-      "pay": 30000,
-      "inDebt": 14000,
+      "pay": 40000,
+      "inDebt": 4000,
       "note": "Mua thêm 1 kẹo mút",
       "productInfo": [
         {
@@ -588,8 +588,8 @@
       "id": "BIZS4NkSG",
       "userId": 1,
       "totalPrice": 6000,
-      "pay": 5000,
-      "inDebt": 1000,
+      "pay": 6000,
+      "inDebt": 0,
       "note": "",
       "productInfo": [
         {

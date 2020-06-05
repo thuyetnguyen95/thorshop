@@ -6,7 +6,7 @@ block content
     .col-md-3
       each item in productCategories
         .mb-3
-          a.list-group-item.active(href='#')= item.name
+          .text-white.list-group-item.bg-secondary(href='#')= item.name
           ul.list-group
             each product in item.products
               li.list-group-item.text-capitalize= product.name
