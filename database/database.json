@@ -21,8 +21,8 @@
     {
       "id": "Oqp1KRi5G",
       "name": "oishi",
-      "stock": 49,
-      "sold": 16,
+      "stock": 48,
+      "sold": 17,
       "price": 6000,
       "expiryAt": "2020-06-30",
       "categoryId": "R5l-BYsuD",
@@ -77,19 +77,92 @@
   "category": [
     {
       "id": "YVWyflYEx",
-      "name": "Đồ ăn"
+      "name": "Đồ ăn",
+      "products": [
+        {
+          "id": "CSvr_j9tW",
+          "name": "Bánh mì đậu đỏ",
+          "stock": 39,
+          "sold": 11,
+          "price": 8000,
+          "expiryAt": "2020-06-13",
+          "categoryId": "YVWyflYEx",
+          "image": "image-1590776479083-890740367.jpg",
+          "addedAt": "2020-05-11T14:14:42.422Z"
+        },
+        {
+          "id": "-ZMhcqiIj",
+          "name": "Kẹo mút",
+          "stock": 966,
+          "sold": 33,
+          "price": 10000,
+          "expiryAt": "2020-05-31",
+          "categoryId": "YVWyflYEx",
+          "image": "image-1589371193111-915027729.jpg",
+          "addedAt": "2020-05-13T11:59:53.116Z"
+        },
+        {
+          "id": "KwdyKjDjo",
+          "name": "Mì tôm",
+          "stock": 49,
+          "price": 6000,
+          "expiryAt": "2020-06-30",
+          "categoryId": "YVWyflYEx",
+          "image": "image-1590776339266-670331350.jpg",
+          "addedAt": "2020-05-26 01:18",
+          "sold": 2
+        }
+      ]
     },
     {
       "id": "R5l-BYsuD",
-      "name": "Snack"
+      "name": "Snack",
+      "products": [
+        {
+          "id": "Oqp1KRi5G",
+          "name": "oishi",
+          "stock": 48,
+          "sold": 17,
+          "price": 6000,
+          "expiryAt": "2020-06-30",
+          "categoryId": "R5l-BYsuD",
+          "image": "image-1589206568299-399970911.JPEG",
+          "addedAt": "2020-05-11T14:16:08.303Z"
+        },
+        {
+          "id": "XL66EVzLp",
+          "name": "Bim bim",
+          "stock": 99,
+          "price": 10000,
+          "expiryAt": "2020-06-30",
+          "categoryId": "R5l-BYsuD",
+          "image": "image-1590776376638-548757267.png",
+          "addedAt": "2020-05-30 01:19",
+          "sold": 1
+        }
+      ]
     },
     {
       "id": "1lOTv3Dt_",
-      "name": "Đồ uống"
+      "name": "Đồ uống",
+      "products": [
+        {
+          "id": "hAfENZWHq",
+          "name": "Red Bull",
+          "stock": 49,
+          "sold": 11,
+          "price": 12000,
+          "expiryAt": "2020-06-30",
+          "categoryId": "1lOTv3Dt_",
+          "image": "image-1589331839514-322859011.png",
+          "addedAt": "2020-05-13T01:03:59.518Z"
+        }
+      ]
     },
     {
       "id": "jP2GLNKNS",
-      "name": "Loại khác"
+      "name": "Loại khác",
+      "products": []
     }
   ],
   "sell": [
@@ -558,6 +631,22 @@
         }
       ],
       "createdAt": "2020-06-04 23:35"
+    },
+    {
+      "id": "IH9uNOp6x",
+      "userId": 32,
+      "totalPrice": 6000,
+      "pay": 6000,
+      "inDebt": 0,
+      "note": "",
+      "productInfo": [
+        {
+          "id": "Oqp1KRi5G",
+          "qty": 1,
+          "price": 6000
+        }
+      ],
+      "createdAt": "2020-06-05 20:51"
     }
   ],
   "users": [

@@ -18,15 +18,6 @@ const getProductStatus = (product) => {
   return status
 }
 
-const generateExpiryDate = () => {
-  const date = new Date()
-  const y = date.getFullYear()
-  const m = ('0' + (date.getMonth() + 2)).slice(-2)
-  const d = ('0' + date.getDate()).slice(-2)
-
-  return `${y}-${m}-${d}`
-}
-
 const getAllProduct = () => {
   let products = Product.all()
 
@@ -55,7 +46,11 @@ module.exports = {
   },
 
   product: (req, res) => {
-    res.render('shop/products');
+    let productCategories = Product.getProductWithCategory()
+    let products = Product.all()
+    console.log(productCategories, products)
+
+    res.render('shop/products', { productCategories, products });
   },
 
   promotion: (req, res) => {
