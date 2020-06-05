@@ -2,6 +2,7 @@ const shortid  = require('shortid')
 const db = require('../database/db')
 const DateHelper = require('../utils/date')
 const { AMOUNT_OF_WARNING } = require('../utils/constant')
+const Category = require('./category')
 
 const save = (product) => {
   const id = shortid.generate()
@@ -71,6 +72,18 @@ const totalProductAlmostOver = () => {
   return count.length || 0
 }
 
+
+const getProductWithCategory = () => {
+  let productCategory = []
+
+  const categories = Category.all()
+  categories.forEach((category, index) => {
+    categories[index]["products"] = findByCategoryId(category.id) || []
+  });
+
+  return categories
+}
+
 module.exports = {
   save,
   all,
@@ -81,4 +94,5 @@ module.exports = {
   sold,
   totalProductOOS,
   totalProductAlmostOver,
+  getProductWithCategory,
 }
