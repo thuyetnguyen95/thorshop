@@ -115,6 +115,7 @@ module.exports = {
       users,
       totalPage,
       currentPage: page,
+      itemPerPage: ITEM_PER_PAGE,
       keyword,
       status,
       date
@@ -203,4 +204,26 @@ module.exports = {
 
     res.redirect('/thor/sold')
   },
+
+  payInDebt: (req, res) => {
+    let id = req.params.id || ''
+    if (!id) return res.redirect('/thor/sold')
+
+    let order = Sell.findById(id)
+    if (!order) return res.redirect('/thor/sold')
+
+    try {
+      let data = {}
+      data.pay = order.pay + order.inDebt
+      data.inDebt = 0
+
+      Sell.update(id, data)
+    } catch (error) {
+      console.log(error)
+
+      res.redirect('/thor/sold')
+    }
+
+    res.redirect('/thor/sold')
+  }
 };

@@ -47,5 +47,6 @@ router.get('/sold', ThorMiddleWare.auth, ThorController.indexSold)
 router.get('/sold/delete/:id', ThorMiddleWare.auth, ThorController.deleteOrder)
 router.get('/sold/edit/:id', ThorMiddleWare.auth, ThorController.editOrder)
 router.post('/sold/edit/:id', ThorMiddleWare.auth, ThorController.updateOrder)
+router.get('/sold/pay-debt/:id', ThorMiddleWare.auth, ThorController.payInDebt)
 
 module.exports = router;
