@@ -1,45 +1,44 @@
 extends ../layout
 
 block content
-  .container
-    // Heading Row
-    .row.align-items-center.my-5
-      .col-lg-7
-        img.img-fluid.rounded.mb-4.mb-lg-0(src='/images/banner.jpg' alt='')
-      // /.col-lg-8
-      .col-lg-5
-        h1.font-weight-light Có mua hay không thì bảo?
-        p
-          | Chào mừng bạn đến với ThorShop, cửa hàng tạp hóa tại OS! của cựu Avengers Thỏ. Tại đây có rất nhiều mặt hàng cứu đói anh/chị/em khi không may ĐỘT NGỘT ngứa mồm và thèm ăn gì đó :))
-        a.btn.btn-primary(href='#') Order ngay nào!
-      // /.col-md-4
-    // /.row
-    // Call to Action Well
-    .card.text-white.bg-secondary.my-5.py-4.text-center
-      .card-body
-        p.text-white.m-0
-          | This call to action card is a great place to showcase some important information or display a clever tagline!
-    // Content Row
-    .row
-      each product in products
-        .col-md-3.mb-3
-          .card.h-100
-            img.card-img-top.product-image(src="images/#{product.image}" alt="Card image cap" class="")
-            .card-body
-              h5.card-title.text-capitalize= product.name
-              p.card-text
-                span Giá 
-                span.text-primary #{product.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}
-              p.card-text
-                if !product.stock
-                  span Trạng thái: 
-                  span.text-danger Đã hết
-                else
-                  span Trạng thái: 
-                  span(class="#{product.stock > 5 ? 'text-success' : 'text-warning' }") #{product.stock > 5 ? 'Đang còn' : 'Sắp hết'}
-            .card-footer
-              a.btn.btn-primary.btn-sm(href='#') More Info
-      
+  // Heading Row
+  .row.align-items-center.my-5
+    .col-lg-7
+      img.img-fluid.rounded.mb-4.mb-lg-0(src='/images/banner.jpg' alt='')
+    // /.col-lg-8
+    .col-lg-5
+      h1.font-weight-light Có mua hay không thì bảo?
+      p
+        | Chào mừng bạn đến với ThorShop, cửa hàng tạp hóa tại OS! của cựu Avengers Thỏ. Tại đây có rất nhiều mặt hàng cứu đói anh/chị/em khi không may ĐỘT NGỘT ngứa mồm và thèm ăn gì đó :))
+      a.btn.btn-primary(href='#') Order ngay nào!
+    // /.col-md-4
+  // /.row
+  // Call to Action Well
+  .card.text-white.bg-secondary.my-5.py-4.text-center
+    .card-body
+      p.text-white.m-0
+        | This call to action card is a great place to showcase some important information or display a clever tagline!
+  // Content Row
+  .row
+    each product in products
+      .col-md-3.mb-3
+        .card.h-100
+          img.card-img-top.product-image(src="images/#{product.image}" alt="Card image cap" class="")
+          .card-body
+            h5.card-title.text-capitalize= product.name
+            p.card-text
+              span Giá 
+              span.text-primary #{product.price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}
+            p.card-text
+              if !product.stock
+                span Trạng thái: 
+                span.text-danger Đã hết
+              else
+                span Trạng thái: 
+                span(class="#{product.stock > 5 ? 'text-success' : 'text-warning' }") #{product.stock > 5 ? 'Đang còn' : 'Sắp hết'}
+          //- .card-footer
+          //-   a.btn.btn-primary.btn-sm(href='#') More Info
+    
 
 block style
   style.
