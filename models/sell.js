@@ -33,8 +33,8 @@ const getTotalInDebt = () => {
   return inDebtOrders.length || 0
 }
 
-const getTotalRevenue = (isToday = true, pareDate = null) => {
-  let date = isToday ? DateHelper.generateTodayDate(false) : pareDate
+const getTotalRevenue = (isToday = true, withDate = null) => {
+  let date = isToday ? DateHelper.generateTodayDate(false) : withDate
   let sollToday = db.get('sell')
     .filter(item => DateHelper.equalDate(item.createdAt, date))
     .value()
@@ -82,6 +82,19 @@ const findById = (id) => {
   return sold || null
 }
 
+const getRevenueWithRange = (from, to = null) => {
+  let date = new Date(from).getDate()
+  let revenueData = []
+
+  for (let i = date; i < date + 6; i++) {
+    let totalRevenue = getTotalRevenue(false, from.setDate(i))
+    revenueData.push(totalRevenue)
+  }
+  
+  return revenueData
+}
+
+
 module.exports = {
   save,
   all,
@@ -93,4 +106,5 @@ module.exports = {
   update,
   getTotalInDebt,
   getTotalRevenue,
+  getRevenueWithRange,
 }

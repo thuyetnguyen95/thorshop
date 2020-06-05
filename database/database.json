@@ -43,8 +43,8 @@
     {
       "id": "-ZMhcqiIj",
       "name": "Kẹo mút",
-      "stock": 968,
-      "sold": 31,
+      "stock": 966,
+      "sold": 33,
       "price": 10000,
       "expiryAt": "2020-05-31",
       "categoryId": "YVWyflYEx",
@@ -54,13 +54,13 @@
     {
       "id": "KwdyKjDjo",
       "name": "Mì tôm",
-      "stock": 50,
+      "stock": 49,
       "price": 6000,
       "expiryAt": "2020-06-30",
       "categoryId": "YVWyflYEx",
       "image": "image-1590776339266-670331350.jpg",
-      "addedAt": "2020-05-30 01:18",
-      "sold": 1
+      "addedAt": "2020-05-26 01:18",
+      "sold": 2
     },
     {
       "id": "XL66EVzLp",
@@ -330,7 +330,7 @@
           "price": 10000
         }
       ],
-      "createdAt": "2020-05-30 01:15"
+      "createdAt": "2020-05-25 01:15"
     },
     {
       "id": "fc9ar9qHe",
@@ -346,7 +346,7 @@
           "price": 10000
         }
       ],
-      "createdAt": "2020-05-30 01:16"
+      "createdAt": "2020-05-26 01:16"
     },
     {
       "id": "DHlGHuQlt",
@@ -410,7 +410,7 @@
           "price": 10000
         }
       ],
-      "createdAt": "2020-05-30 01:17"
+      "createdAt": "2020-06-02 01:17"
     },
     {
       "id": "ddtNbHmaZ",
@@ -436,7 +436,7 @@
           "price": 6000
         }
       ],
-      "createdAt": "2020-05-30 01:18"
+      "createdAt": "2020-06-03 01:18"
     },
     {
       "id": "e8qvj19-rJ",
@@ -462,7 +462,7 @@
           "price": 6000
         }
       ],
-      "createdAt": "2020-05-30 01:18"
+      "createdAt": "2020-05-28 01:18"
     },
     {
       "id": "lWP3wiZYR",
@@ -493,7 +493,7 @@
           "price": 10000
         }
       ],
-      "createdAt": "2020-05-30 01:20"
+      "createdAt": "2020-05-27 01:20"
     },
     {
       "id": "f2Q2sDLOt",
@@ -526,6 +526,38 @@
         }
       ],
       "createdAt": "2020-06-01 23:05"
+    },
+    {
+      "id": "aSrK-lVHF",
+      "userId": 13,
+      "totalPrice": 20000,
+      "pay": 20000,
+      "inDebt": 0,
+      "note": "",
+      "productInfo": [
+        {
+          "id": "-ZMhcqiIj",
+          "qty": 2,
+          "price": 10000
+        }
+      ],
+      "createdAt": "2020-06-04 00:15"
+    },
+    {
+      "id": "Z8l1SXcCZ",
+      "userId": 1,
+      "totalPrice": 6000,
+      "pay": 6000,
+      "inDebt": 0,
+      "note": "",
+      "productInfo": [
+        {
+          "id": "KwdyKjDjo",
+          "qty": 1,
+          "price": 6000
+        }
+      ],
+      "createdAt": "2020-06-04 23:35"
     }
   ],
   "users": [
