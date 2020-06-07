@@ -6,19 +6,27 @@ block content
     .col-md-3
       each item in productCategories
         .mb-3
-          .text-white.list-group-item.bg-secondary(href='#')= item.name
+          a.text-white.list-group-item.bg-secondary(href='/products/#{item.id}')= item.name
           ul.list-group
             each product in item.products
               li.list-group-item.text-capitalize= product.name
                 span.float-right.badge.badge-success= product.stock
             
       // /.div
-      
+
     // /.col
     .col-md-9
+      .row
+        nav(aria-label='breadcrumb').col-md-12
+          ol.breadcrumb
+            li.breadcrumb-item
+              a(href='/products') Sản phẩm
+            if categoryName
+              li.breadcrumb-item.active(aria-current='page')= categoryName
+
       .row.align-items-center
         .col-md-6
-          h3 Tất cả
+          h4= categoryName || 'Tất cả'
         .col-md-6
           p.text-right
             strong= products.length
@@ -29,7 +37,7 @@ block content
         each product in products
           .col-md-3.mb-3
             .card.h-100
-              img.card-img-top.product-image(src='images/#{product.image}')
+              img.card-img-top.product-image(src='/images/#{product.image}')
               .card-body
                 h5.card-title.text-capitalize= product.name
                 p.card-text
@@ -38,21 +46,3 @@ block content
                 p.card-text
                   span Trạng thái:
                   span.text-success đang còn
-        
-     
-      .row
-        nav.ml-auto
-          ul.pagination
-            li.page-item
-              a.page-link(href='#' aria-label='Previous')
-                span(aria-hidden='true') &laquo;
-            li.page-item
-              a.page-link(href='#') 1
-            li.page-item
-              a.page-link(href='#') 2
-            li.page-item
-              a.page-link(href='#') 3
-            li.page-item
-              a.page-link(href='#' aria-label='Next')
-                span(aria-hidden='true') &raquo;
-

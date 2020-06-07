@@ -46,11 +46,22 @@ module.exports = {
   },
 
   product: (req, res) => {
+    let categoryId = req.params.id || ''
     let productCategories = Product.getProductWithCategory()
+    let categories = Category.all()
     let products = Product.all()
-    console.log(productCategories, products)
+    
+    if (categoryId) {
+      products = products.filter(products => products.categoryId === categoryId)
+    }
+    
+    let categoryName = ''
+    if (categoryId) {
+      let x = categories.filter(item => item.id === categoryId)
+      categoryName = x.length ? x[0].name : ''
+    }
 
-    res.render('shop/products', { productCategories, products });
+    res.render('shop/products', { productCategories, products, categories, categoryName });
   },
 
   promotion: (req, res) => {
