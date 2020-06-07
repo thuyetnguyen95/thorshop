@@ -14,10 +14,11 @@ block content
     // /.col-md-4
   // /.row
   // Call to Action Well
-  .card.text-white.bg-secondary.my-5.py-4.text-center
-    .card-body
-      p.text-white.m-0
-        | This call to action card is a great place to showcase some important information or display a clever tagline!
+  hr.mt-5.mb-5
+  //- .card.text-white.bg-secondary.my-5.py-4.text-center
+  //-   .card-body
+  //-     p.text-white.m-0
+  //-       | This call to action card is a great place to showcase some important information or display a clever tagline!
   // Content Row
   .row
     each product in products
@@ -38,8 +39,3 @@ block content
                 span(class="#{product.stock > 5 ? 'text-success' : 'text-warning' }") #{product.stock > 5 ? 'Đang còn' : 'Sắp hết'}
           //- .card-footer
           //-   a.btn.btn-primary.btn-sm(href='#') More Info
-    
-
-block style
-  style.
-    
