@@ -6,6 +6,10 @@ body {
   padding-top: 50px;
 }
 
+#app-container .container {
+  min-height: 768px;
+}
+
 a {
   color: #00B7FF;
 }
