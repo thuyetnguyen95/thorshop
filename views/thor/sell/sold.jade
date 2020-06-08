@@ -67,12 +67,12 @@ block content
                       onclick="openConfirmDelete('#{item.id}')"
                     ) Xóa
                     if item.inDebt
-                      button.btn.btn-secondary.btn-sm.ml-1(
+                      button.btn.btn-success.btn-sm.ml-1(
                         type='button'
                         data-toggle='modal'
                         data-target='#modalConfirmPay'
                         onclick="openConfirmPay('#{item.id}', '#{customer[0].name}', '#{item.inDebt}')"
-                      ) Nợ
+                      ) Pay
   hr
   .row
     .col-md-6.offset-md-6

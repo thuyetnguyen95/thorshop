@@ -4,6 +4,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require('express-session')
+const flash = require('connect-flash');
 
 var indexRouter = require('./routes/index');
 var thorRouter = require('./routes/thor');
@@ -22,6 +24,13 @@ app.use(express.urlencoded({
 app.use(cookieParser(process.env.APP_SECRET_KEY || 'thor'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules/bootstrap/dist')))
+app.use(session({
+  secret: 'thor',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {maxAge: 60000}
+}))
+app.use(flash())
 
 app.use(function (req, res, next) {
   res.locals.title = 'Advengers Thor Shop'
