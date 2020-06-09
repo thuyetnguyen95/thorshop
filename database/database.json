@@ -10,10 +10,10 @@
     {
       "id": "CSvr_j9tW",
       "name": "Bánh mì đậu đỏ",
-      "stock": 39,
+      "stock": 38,
       "sold": 11,
       "price": 8000,
-      "expiryAt": "2020-06-13",
+      "expiryAt": "2020-07-09",
       "categoryId": "YVWyflYEx",
       "image": "image-1590776479083-890740367.jpg",
       "addedAt": "2020-05-11T14:14:42.422Z"
@@ -24,7 +24,7 @@
       "stock": 48,
       "sold": 17,
       "price": 6000,
-      "expiryAt": "2020-06-30",
+      "expiryAt": "2020-07-09",
       "categoryId": "R5l-BYsuD",
       "image": "image-1589206568299-399970911.JPEG",
       "addedAt": "2020-05-11T14:16:08.303Z"
@@ -44,7 +44,7 @@
       "id": "-ZMhcqiIj",
       "name": "Kẹo mút",
       "stock": 966,
-      "sold": 33,
+      "sold": 34,
       "price": 10000,
       "expiryAt": "2020-05-31",
       "categoryId": "YVWyflYEx",
@@ -65,7 +65,7 @@
     {
       "id": "XL66EVzLp",
       "name": "Bim bim",
-      "stock": 99,
+      "stock": 100,
       "price": 10000,
       "expiryAt": "2020-06-30",
       "categoryId": "R5l-BYsuD",
@@ -163,10 +163,6 @@
       "id": "jP2GLNKNS",
       "name": "Loại khác",
       "products": []
-    },
-    {
-      "id": "gEFGL3U7N",
-      "name": "sấdjkkl"
     }
   ],
   "sell": [
@@ -493,8 +489,8 @@
       "id": "ddtNbHmaZ",
       "userId": 1,
       "totalPrice": 34000,
-      "pay": 30000,
-      "inDebt": 4000,
+      "pay": 34000,
+      "inDebt": 0,
       "note": "",
       "productInfo": [
         {
@@ -544,7 +540,7 @@
     {
       "id": "lWP3wiZYR",
       "userId": 1,
-      "totalPrice": 36000,
+      "totalPrice": 26000,
       "pay": 42000,
       "inDebt": 0,
       "note": "Xóa mì tôm",
@@ -563,11 +559,6 @@
           "id": "hAfENZWHq",
           "qty": 1,
           "price": 12000
-        },
-        {
-          "id": "XL66EVzLp",
-          "qty": 1,
-          "price": 10000
         }
       ],
       "createdAt": "2020-05-27 01:20"

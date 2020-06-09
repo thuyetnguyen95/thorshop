@@ -62,6 +62,8 @@ module.exports = {
       products,
       keyword,
       status,
+      errorMsg: req.flash('error') || '',
+      successMsg: req.flash('success') || '',
     })
   },
 
@@ -100,6 +102,12 @@ module.exports = {
         categoryId,
         image
       })
+
+      if (product) {
+        req.flash('success', 'Thêm sản phẩm thành công!')
+      } else {
+        req.flash('error', 'Không thể tạo sản phẩm')
+      }
 
       return product ? res.redirect('/thor/product') : res.redirect('/thor/product/create')
     })
@@ -152,6 +160,12 @@ module.exports = {
 
       let product = Product.update(id, dataUpdate)
 
+      if (product) {
+        req.flash('success', 'Cập nhật sản phẩm thành công!')
+      } else {
+        req.flash('error', 'Không thể cập nhật thông tin sản phẩm')
+      }
+
       return product ? res.redirect('/thor/product') : res.redirect('/thor/product/edit/' + id)
     })
   },
@@ -161,6 +175,8 @@ module.exports = {
 
     //TODO: implement fail case
     Product.remove(id)
+
+    req.flash('success', 'Xóa sản phẩm thành công!')
 
     return res.redirect('/thor/product')
   },
@@ -184,6 +200,8 @@ module.exports = {
         stock,
         expiryAt
       })
+      
+      req.flash('success', 'Cập nhật số lượng hàng thành công!')
 
       return res.redirect('/thor/product')
     }
