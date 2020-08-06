@@ -1,4 +1,4 @@
 .DS_Store
+database/database.json
 node_modules/*
 .env
-/database/database.json
