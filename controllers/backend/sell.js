@@ -60,13 +60,17 @@ function getIdsFromName(name) {
   }, [])
 }
 
-
 module.exports = {
   indexSell: (req, res) => {
     let products = Product.all()
     let users = User.all()
 
-    res.render("thor/sell/index", { products, users });
+    res.render("thor/sell/index", {
+      products,
+      users,
+      errorMsg: req.flash('error') || '',
+      successMsg: req.flash('success') || '',
+    });
   },
 
   storeSell: (req, res) => {
@@ -90,8 +94,11 @@ module.exports = {
         note,
         productInfo,
       })
+
+      req.flash('success', 'Thanh toán thành công!')
     } catch (error) {
       console.log(error)
+      req.flash('error', 'Thanh toán không thành công!')
     }
 
     return res.redirect('/thor/sell')
@@ -118,7 +125,9 @@ module.exports = {
       itemPerPage: ITEM_PER_PAGE,
       keyword,
       status,
-      date
+      date,
+      errorMsg: req.flash('error') || '',
+      successMsg: req.flash('success') || '',
     });
   },
 
@@ -132,9 +141,13 @@ module.exports = {
         if (product) {
           Product.update(product.id, { stock: product.stock + item.qty })
         }
-    })
+      })
 
       setTimeout(() => { Sell.remove(id) }, 100);
+
+      req.flash('success', 'Xóa order thành công!')
+    } else {
+      req.flash('error', 'Oops! đã xảy ra lỗi, không thể xóa order này!')
     }
 
     return res.redirect('/thor/sold')
@@ -198,8 +211,10 @@ module.exports = {
       data.productInfo = productInfo || order.productInfo
 
       Sell.update(id, data)
+      req.flash('success', 'Cập nhật order thành công!')
     } catch (error) {
       console.log(error)
+      req.flash('error', 'Oops! không thể cập nhật order!')
     }
 
     res.redirect('/thor/sold')
@@ -218,8 +233,11 @@ module.exports = {
       data.inDebt = 0
 
       Sell.update(id, data)
+
+      req.flash('success', 'Thanh toán nợ thành công')
     } catch (error) {
       console.log(error)
+      req.flash('error', 'Thanh toán nợ không thành công, vui lòng thử lại!')
 
       res.redirect('/thor/sold')
     }

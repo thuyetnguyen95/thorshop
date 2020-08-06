@@ -6,7 +6,9 @@ module.exports = {
     const categories = Category.all()
 
     res.render('thor/category/index', {
-      categories
+      categories,
+      errorMsg: req.flash('error') || '',
+      successMsg: req.flash('success') || '',
     })
   },
 
@@ -19,6 +21,7 @@ module.exports = {
     if (!name) return res.redirect('/thor/category/create')
 
     let category = Category.save(name)
+    req.flash('success', 'Thêm loại sản phẩm thành công!')
 
     return category ? res.redirect('/thor/category') : res.redirect('/thor/category/create')
   },
@@ -46,26 +49,29 @@ module.exports = {
 
     let category = Category.update(id, name)
 
-    // if (!category) {
-    //   const error = 'Oops! có vẻ không update được rồi @@'
+    if (!category) {
+      req.flash('error', 'Oops! có vẻ không update được rồi @@')
 
-    //   res.redirect('/thor/category')
-    // }
+      return res.redirect('/thor/category')
+    }
+    req.flash('success', 'Cập nhật loại sản phẩm thành công!')
 
-    res.redirect('/thor/category')
+    return res.redirect('/thor/category')
   },
+
   deleteCategory: (req, res) => {
     let id = req.params.id || ''
 
     const products = Product.findByCategoryId(id)
     if (products.length) {
-      let error = 'Oops! Bạn không thể xóa cái này đâu :('
+      req.flash('error', 'Oops! Loại sản phẩm này đang được sử dụng nên không thể xóa! :(')
 
       return res.redirect('/thor/category')
     }
 
     //TODO: implement fail case
     Category.remove(id)
+    req.flash('success', 'Xóa loại sản phẩm thành công!')
 
     return res.redirect('/thor/category')
   }
